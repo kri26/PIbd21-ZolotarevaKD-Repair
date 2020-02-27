@@ -94,7 +94,7 @@
             this.groupBoxMaterials.Size = new System.Drawing.Size(701, 390);
             this.groupBoxMaterials.TabIndex = 4;
             this.groupBoxMaterials.TabStop = false;
-            this.groupBoxMaterials.Text = "Детали";
+            this.groupBoxMaterials.Text = "Ремонтные работы";
             // 
             // buttonRef
             // 
