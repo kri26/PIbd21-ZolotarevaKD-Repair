@@ -24,7 +24,6 @@ namespace RepairView
 
         private void buttonAdd_Click(object sender, EventArgs e)
         {
-            repairWorkMaterials = new Dictionary<int, (string, int)>();
             var form = Container.Resolve<FormRepairWorkMaterial>();
             if (form.ShowDialog() == DialogResult.OK)
             {

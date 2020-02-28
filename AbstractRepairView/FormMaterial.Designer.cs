@@ -81,6 +81,7 @@
             this.Controls.Add(this.labelName);
             this.Name = "FormMaterial";
             this.Text = "Материал";
+            this.Load += new System.EventHandler(this.FormMaterial_Load);
             this.ResumeLayout(false);
             this.PerformLayout();
 

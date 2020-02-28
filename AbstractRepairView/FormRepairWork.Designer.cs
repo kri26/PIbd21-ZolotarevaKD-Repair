@@ -191,6 +191,7 @@
             this.Name = "FormRepairWork";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Ремонтные работы";
+            this.Load += new System.EventHandler(this.FormRepairWork_Load);
             this.groupBoxMaterials.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView)).EndInit();
             this.ResumeLayout(false);
