@@ -21,9 +21,7 @@ namespace RepairListImplement.Implements
             Order tempOrder = model.Id.HasValue ? null : new Order { Id = 1 };
             foreach (var order in source.Orders)
             {
-                if (order.DateCreate == model.DateCreate && order.Count == model.Count &&
-                    order.RepairWorkId == model.RepairWorkId && order.Sum == model.Sum &&
-                    order.Status == model.Status && order.Id != model.Id)
+                if (!model.Id.HasValue && order.Id >= order.Id)
                 {
                     throw new Exception("Такой заказ уже существует");
                 }
