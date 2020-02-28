@@ -9,7 +9,7 @@ using System.Text;
 
 namespace RepairListImplement.Implements
 {
-    public class MainLogic : IMainLogic
+    public class MainLogic
     {
         private readonly DataListSingleton source;
         public MainLogic()
