@@ -7,7 +7,7 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RepairView", "AbstractRepai
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "RepairBusinessLogic", "AbstractRepairBusinessLogic\RepairBusinessLogic.csproj", "{6B590C56-9680-421C-976B-1217176B9851}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RepairListImplemen", "RepairListImplemen\RepairListImplemen.csproj", "{E3D27918-A68C-46EC-8E30-9D91396B52AC}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "RepairListImplement", "RepairListImplemen\RepairListImplement.csproj", "{E3D27918-A68C-46EC-8E30-9D91396B52AC}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

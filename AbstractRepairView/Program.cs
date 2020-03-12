@@ -1,5 +1,6 @@
 ﻿using RepairBusinessLogic.BusinessLogic;
 using RepairBusinessLogic.Interfaces;
+
 using RepairListImplement.Implements;
 using System;
 using System.Windows.Forms;
@@ -29,6 +30,8 @@ namespace RepairView
             currentContainer.RegisterType<IRepairWorkLogic, RepairWorkLogic>(
                 new HierarchicalLifetimeManager());
             currentContainer.RegisterType<IOrderLogic, OrderLogic>(
+                new HierarchicalLifetimeManager());
+            currentContainer.RegisterType<IWarehouseLogic, WarehouseLogic>(
                 new HierarchicalLifetimeManager());
             currentContainer.RegisterType<MainLogic>(
                 new HierarchicalLifetimeManager());

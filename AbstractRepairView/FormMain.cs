@@ -1,14 +1,8 @@
-﻿using RepairBusinessLogic.BindingModels;
+﻿using AbstractRepairView;
+using RepairBusinessLogic.BindingModels;
 using RepairBusinessLogic.BusinessLogic;
 using RepairBusinessLogic.Interfaces;
 using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 using Unity;
 
@@ -101,7 +95,11 @@ namespace RepairView
                 }
             }
         }
-
+        private void складыToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            var form = Container.Resolve<FormWarehouses>();
+            form.ShowDialog();
+        }
         private void buttonPayOrder_Click(object sender, EventArgs e)
         {
             if (dataGridView.SelectedRows.Count == 1)
@@ -122,6 +120,12 @@ namespace RepairView
         private void buttonRef_Click(object sender, EventArgs e)
         {
             LoadData();
+        }
+
+        private void buttonReplenishWarehouse_Click(object sender, EventArgs e)
+        {
+            var form = Container.Resolve<FormReplenishWarehouse>();
+            form.ShowDialog();
         }
     }
 }

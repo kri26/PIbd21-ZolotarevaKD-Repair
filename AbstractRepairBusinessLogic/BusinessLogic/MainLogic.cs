@@ -1,6 +1,7 @@
 ﻿using RepairBusinessLogic.BindingModels;
 using RepairBusinessLogic.Enums;
 using RepairBusinessLogic.Interfaces;
+using RepairBusinessLogic.ViewModels;
 using System;
 using System.Collections.Generic;
 using System.Text;
@@ -10,9 +11,11 @@ namespace RepairBusinessLogic.BusinessLogic
     public class MainLogic
     {
         private readonly IOrderLogic orderLogic;
-        public MainLogic(IOrderLogic orderLogic)
+        private readonly IWarehouseLogic warehouseLogic;
+        public MainLogic(IOrderLogic orderLogic, IWarehouseLogic warehouseLogic)
         {
             this.orderLogic = orderLogic;
+            this.warehouseLogic = warehouseLogic;
         }
         public void CreateOrder(CreateOrderBindingModel model)
         {
@@ -90,6 +93,10 @@ namespace RepairBusinessLogic.BusinessLogic
                 DateImplement = order.DateImplement,
                 Status = OrderStatus.Оплачен
             });
+        }
+        public void ReplanishWarehouse(WarehouseMaterialBindingModel model)
+        {
+            warehouseLogic.AddMaterial(model);
         }
     }
 }
