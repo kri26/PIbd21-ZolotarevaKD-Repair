@@ -138,6 +138,9 @@
     <EmbeddedResource Include="FormRepairWorks.resx">
       <DependentUpon>FormRepairWorks.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="FormReplenishWarehouse.resx">
+      <DependentUpon>FormReplenishWarehouse.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>

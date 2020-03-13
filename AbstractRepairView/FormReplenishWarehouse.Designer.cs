@@ -40,9 +40,10 @@
             // 
             // buttonCancel
             // 
-            this.buttonCancel.Location = new System.Drawing.Point(260, 143);
+            this.buttonCancel.Location = new System.Drawing.Point(231, 114);
+            this.buttonCancel.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.buttonCancel.Name = "buttonCancel";
-            this.buttonCancel.Size = new System.Drawing.Size(132, 40);
+            this.buttonCancel.Size = new System.Drawing.Size(117, 32);
             this.buttonCancel.TabIndex = 11;
             this.buttonCancel.Text = "Отмена";
             this.buttonCancel.UseVisualStyleBackColor = true;
@@ -50,9 +51,10 @@
             // 
             // buttonSave
             // 
-            this.buttonSave.Location = new System.Drawing.Point(136, 143);
+            this.buttonSave.Location = new System.Drawing.Point(121, 114);
+            this.buttonSave.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.buttonSave.Name = "buttonSave";
-            this.buttonSave.Size = new System.Drawing.Size(118, 40);
+            this.buttonSave.Size = new System.Drawing.Size(105, 32);
             this.buttonSave.TabIndex = 10;
             this.buttonSave.Text = "Сохранить";
             this.buttonSave.UseVisualStyleBackColor = true;
@@ -61,58 +63,61 @@
             // comboBoxMaterial
             // 
             this.comboBoxMaterial.FormattingEnabled = true;
-            this.comboBoxMaterial.Location = new System.Drawing.Point(147, 53);
+            this.comboBoxMaterial.Location = new System.Drawing.Point(131, 42);
+            this.comboBoxMaterial.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.comboBoxMaterial.Name = "comboBoxMaterial";
-            this.comboBoxMaterial.Size = new System.Drawing.Size(245, 28);
+            this.comboBoxMaterial.Size = new System.Drawing.Size(218, 24);
             this.comboBoxMaterial.TabIndex = 9;
             // 
             // textBoxCount
             // 
-            this.textBoxCount.Location = new System.Drawing.Point(146, 93);
+            this.textBoxCount.Location = new System.Drawing.Point(130, 74);
+            this.textBoxCount.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.textBoxCount.Name = "textBoxCount";
-            this.textBoxCount.Size = new System.Drawing.Size(246, 26);
+            this.textBoxCount.Size = new System.Drawing.Size(219, 22);
             this.textBoxCount.TabIndex = 8;
             // 
             // label2
             // 
             this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(12, 97);
+            this.label2.Location = new System.Drawing.Point(11, 78);
             this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(104, 20);
+            this.label2.Size = new System.Drawing.Size(90, 17);
             this.label2.TabIndex = 7;
             this.label2.Text = "Количество:";
             // 
             // label1
             // 
             this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(14, 56);
+            this.label1.Location = new System.Drawing.Point(12, 45);
             this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(97, 20);
+            this.label1.Size = new System.Drawing.Size(78, 17);
             this.label1.TabIndex = 6;
-            this.label1.Text = "Компонент:";
+            this.label1.Text = "Материал:";
             // 
             // comboBoxWarehouse
             // 
             this.comboBoxWarehouse.FormattingEnabled = true;
-            this.comboBoxWarehouse.Location = new System.Drawing.Point(147, 12);
+            this.comboBoxWarehouse.Location = new System.Drawing.Point(131, 10);
+            this.comboBoxWarehouse.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.comboBoxWarehouse.Name = "comboBoxWarehouse";
-            this.comboBoxWarehouse.Size = new System.Drawing.Size(245, 28);
+            this.comboBoxWarehouse.Size = new System.Drawing.Size(218, 24);
             this.comboBoxWarehouse.TabIndex = 13;
             // 
             // label3
             // 
             this.label3.AutoSize = true;
-            this.label3.Location = new System.Drawing.Point(14, 15);
+            this.label3.Location = new System.Drawing.Point(12, 12);
             this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(62, 20);
+            this.label3.Size = new System.Drawing.Size(52, 17);
             this.label3.TabIndex = 12;
             this.label3.Text = "Склад:";
             // 
             // FormReplenishWarehouse
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(9F, 20F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(453, 216);
+            this.ClientSize = new System.Drawing.Size(403, 173);
             this.Controls.Add(this.comboBoxWarehouse);
             this.Controls.Add(this.label3);
             this.Controls.Add(this.buttonCancel);
@@ -121,6 +126,7 @@
             this.Controls.Add(this.textBoxCount);
             this.Controls.Add(this.label2);
             this.Controls.Add(this.label1);
+            this.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.Name = "FormReplenishWarehouse";
             this.Text = "Пополнить склад";
             this.Load += new System.EventHandler(this.FormReplenishWarehouse_Load);
