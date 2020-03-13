@@ -173,10 +173,6 @@
       <Project>{3119d9bd-f4c1-4aea-977d-926b42d4795e}</Project>
       <Name>RepairFileImplement</Name>
     </ProjectReference>
-    <ProjectReference Include="..\RepairListImplemen\RepairListImplemen.csproj">
-      <Project>{e3d27918-a68c-46ec-8e30-9d91396b52ac}</Project>
-      <Name>RepairListImplement</Name>
-    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
