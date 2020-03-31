@@ -46,7 +46,7 @@ namespace AbstractRepairView
 
             try
             {
-                List<WarehouseViewModel> list = warehouseLogic.GetList();
+                List<WarehouseViewModel> list = warehouseLogic.Read(null);
                 if (list != null)
                 {
                     comboBoxWarehouse.DisplayMember = "WarehouseName";

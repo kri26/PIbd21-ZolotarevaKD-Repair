@@ -207,11 +207,11 @@ namespace RepairFileImplement
             {
                 var xElement = new XElement("Materials");
 
-                foreach (var Material in Materials)
+                foreach (var material in Materials)
                 {
                     xElement.Add(new XElement("Material",
                     new XAttribute("Id", material.Id),
-                    new XElement("MaterialName", Material.MaterialName)));
+                    new XElement("MaterialName", material.MaterialName)));
                 }
 
                 XDocument xDocument = new XDocument(xElement);
@@ -248,7 +248,7 @@ namespace RepairFileImplement
             {
                 var xElement = new XElement("RepairWorks");
 
-                foreach (var RepairWork in RepairWorks)
+                foreach (var repairWork in RepairWorks)
                 {
                     xElement.Add(new XElement("RepairWork",
                     new XAttribute("Id", repairWork.Id),

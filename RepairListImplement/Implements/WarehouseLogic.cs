@@ -141,18 +141,18 @@ namespace RepairListImplement.Implements
             {
                 if (wc.WarehouseId == warehouse.Id)
                 {
-                    string materialName = string.Empty;
+                    string MaterialName = string.Empty;
 
-                    foreach (var material in source.Materials)
+                    foreach (var Material in source.Materials)
                     {
-                        if (wc.MaterialId == material.Id)
+                        if (wc.MaterialId == Material.Id)
                         {
-                            materialName = material.MaterialName;
+                            MaterialName = Material.MaterialName;
                             break;
                         }
                     }
 
-                    warehouseMaterials.Add(wc.MaterialId, (materialName, wc.Count));
+                    warehouseMaterials.Add(wc.MaterialId, (MaterialName, wc.Count));
                 }
             }
 
@@ -170,9 +170,10 @@ namespace RepairListImplement.Implements
             return true;
         }
 
-        public void WriteOffMaterials(OrderViewModel model)
+        public bool WriteOffMaterials(OrderViewModel model)
         {
             // Заглушка
+            return false;
         }
     }
 }
