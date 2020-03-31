@@ -1,27 +1,32 @@
-﻿using RepairBusinessLogic.BindingModels;
-using RepairBusinessLogic.Interfaces;
-using RepairListImplement.Models;
-using RepairBusinessLogic.ViewModels;
-using RepairFileImplement;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+using RepairBusinessLogic.BindingModels;
+using RepairBusinessLogic.Interfaces;
+using RepairFileImplement.Models;
+using RepairBusinessLogic.ViewModels;
 
 namespace RepairFileImplement.Implements
 {
     public class OrderLogic : IOrderLogic
     {
         private readonly FileDataListSingleton source;
+
         public OrderLogic()
         {
             source = FileDataListSingleton.GetInstance();
         }
+
         public void CreateOrUpdate(OrderBindingModel model)
         {
             Order element;
+
             if (model.Id.HasValue)
             {
                 element = source.Orders.FirstOrDefault(rec => rec.Id == model.Id);
+
                 if (element == null)
                 {
                     throw new Exception("Элемент не найден");
@@ -29,11 +34,11 @@ namespace RepairFileImplement.Implements
             }
             else
             {
-                int maxId = source.Orders.Count > 0 ? source.Orders.Max(rec =>
-               rec.Id) : 0;
+                int maxId = source.Orders.Count > 0 ? source.Orders.Max(rec => rec.Id) : 0;
                 element = new Order { Id = maxId + 1 };
                 source.Orders.Add(element);
             }
+
             element.RepairWorkId = model.RepairWorkId == 0 ? element.RepairWorkId : model.RepairWorkId;
             element.Count = model.Count;
             element.Sum = model.Sum;
@@ -41,10 +46,11 @@ namespace RepairFileImplement.Implements
             element.DateCreate = model.DateCreate;
             element.DateImplement = model.DateImplement;
         }
+
         public void Delete(OrderBindingModel model)
         {
-            Order element = source.Orders.FirstOrDefault(rec => rec.Id ==
-           model.Id);
+            Order element = source.Orders.FirstOrDefault(rec => rec.Id == model.Id);
+
             if (element != null)
             {
                 source.Orders.Remove(element);
@@ -54,6 +60,7 @@ namespace RepairFileImplement.Implements
                 throw new Exception("Элемент не найден");
             }
         }
+
         public List<OrderViewModel> Read(OrderBindingModel model)
         {
             return source.Orders
@@ -61,6 +68,7 @@ namespace RepairFileImplement.Implements
             .Select(rec => new OrderViewModel
             {
                 Id = rec.Id,
+                RepairWorkId = rec.RepairWorkId,
                 RepairWorkName = GetRepairWorkName(rec.RepairWorkId),
                 Count = rec.Count,
                 Sum = rec.Sum,
@@ -74,8 +82,10 @@ namespace RepairFileImplement.Implements
         private string GetRepairWorkName(int id)
         {
             string name = "";
-            var RepairWork = source.RepairWorks.FirstOrDefault(x => x.Id == id);
-            name = RepairWork != null ? RepairWork.RepairWorkName : "";
+            var repairWork = source.RepairWorks.FirstOrDefault(x => x.Id == id);
+
+            name = repairWork != null ? repairWork.RepairWorkName : "";
+
             return name;
         }
     }

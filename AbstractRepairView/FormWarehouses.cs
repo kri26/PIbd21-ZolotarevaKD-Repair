@@ -1,4 +1,5 @@
-﻿using RepairBusinessLogic.Interfaces;
+﻿using RepairBusinessLogic.BindingModels;
+using RepairBusinessLogic.Interfaces;
 using System;
 using System.Windows.Forms;
 using Unity;
@@ -27,13 +28,14 @@ namespace AbstractRepairView
         {
             try
             {
-                var list = logic.GetList();
+                var list = logic.Read(null);
 
                 if (list != null)
                 {
                     dataGridView.DataSource = list;
                     dataGridView.Columns[0].Visible = false;
                     dataGridView.Columns[1].AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill;
+                    dataGridView.Columns[2].Visible = false;
                 }
             }
             catch (Exception ex)
@@ -80,7 +82,7 @@ namespace AbstractRepairView
 
                     try
                     {
-                        logic.DelElement(id);
+                        logic.Delete(new WarehouseBindingModel { Id = id });
                     }
                     catch (Exception ex)
                     {

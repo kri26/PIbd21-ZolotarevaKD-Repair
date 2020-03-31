@@ -6,11 +6,10 @@ namespace RepairBusinessLogic.Interfaces
 {
     public interface IWarehouseLogic
     {
-        List<WarehouseViewModel> GetList();
-        WarehouseViewModel GetElement(int id);
-        void AddElement(WarehouseBindingModel model);
-        void UpdElement(WarehouseBindingModel model);
-        void DelElement(int id);
+        List<WarehouseViewModel> Read(WarehouseBindingModel model);
+        void CreateOrUpdate(WarehouseBindingModel model);
+        void Delete(WarehouseBindingModel model);
         void AddMaterial(WarehouseMaterialBindingModel model);
+        bool WriteOffMaterials(OrderViewModel model);
     }
 }

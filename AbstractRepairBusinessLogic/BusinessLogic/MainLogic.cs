@@ -39,17 +39,24 @@ namespace RepairBusinessLogic.BusinessLogic
             {
                 throw new Exception("Заказ не в статусе \"Принят\"");
             }
-            orderLogic.CreateOrUpdate(new OrderBindingModel
+            if (warehouseLogic.WriteOffMaterials(order))
             {
-                Id = order.Id,
-                RepairWorkId = order.RepairWorkId,
-                Count = order.Count,
-                Sum = order.Sum,
-                DateCreate = order.DateCreate,
-                DateImplement = null,
-                Status = OrderStatus.Выполняется
-            });
-        }
+                orderLogic.CreateOrUpdate(new OrderBindingModel
+                {
+                    Id = order.Id,
+                    RepairWorkId = order.RepairWorkId,
+                    Count = order.Count,
+                    Sum = order.Sum,
+                    DateCreate = order.DateCreate,
+                    DateImplement = null,
+                    Status = OrderStatus.Выполняется
+                });
+            }
+            else
+                {
+                    throw new Exception("На складах недостаточно компонентов");
+                }
+            }
         public void FinishOrder (ChangeStatusBindingModel model)
         {
             var order = orderLogic.Read(new OrderBindingModel { Id = model.OrderId })?[0];

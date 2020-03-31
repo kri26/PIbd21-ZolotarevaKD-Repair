@@ -17,7 +17,7 @@ namespace AbstractRepairView
 
         private readonly IWarehouseLogic logic;
         private int? id;
-        private List<WarehouseMaterialViewModel> warehouseMaterials;
+        private Dictionary<int, (string, int)> warehouseMaterials;
 
         public FormWarehouse(IWarehouseLogic logic)
         {
@@ -31,7 +31,7 @@ namespace AbstractRepairView
             {
                 try
                 {
-                    WarehouseViewModel view = logic.GetElement(id.Value);
+                    WarehouseViewModel view = logic.Read(new WarehouseBindingModel { Id = id })?[0];
                     if (view != null)
                     {
                         textBoxName.Text = view.WarehouseName;
@@ -46,7 +46,7 @@ namespace AbstractRepairView
             }
             else
             {
-                warehouseMaterials = new List<WarehouseMaterialViewModel>();
+                warehouseMaterials = new Dictionary<int, (string, int)>();
             }
         }
 
@@ -56,12 +56,16 @@ namespace AbstractRepairView
             {
                 if (warehouseMaterials != null)
                 {
-                    dataGridView.DataSource = null;
-                    dataGridView.DataSource = warehouseMaterials;
+                    dataGridView.Rows.Clear();
+                    dataGridView.ColumnCount = 3;
                     dataGridView.Columns[0].Visible = false;
-                    dataGridView.Columns[1].Visible = false;
-                    dataGridView.Columns[2].Visible = false;
-                    dataGridView.Columns[3].AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill;
+                    dataGridView.Columns[1].HeaderText = "Компонент";
+                    dataGridView.Columns[2].HeaderText = "Количество";
+                    dataGridView.Columns[2].AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill;
+                    foreach (var wc in warehouseMaterials)
+                    {
+                        dataGridView.Rows.Add(new object[] { wc.Key, wc.Value.Item1, wc.Value.Item2 });
+                    }
                 }
             }
             catch (Exception ex)
@@ -80,14 +84,11 @@ namespace AbstractRepairView
 
             try
             {
-                if (id.HasValue)
+                logic.CreateOrUpdate(new WarehouseBindingModel
                 {
-                    logic.UpdElement(new WarehouseBindingModel { Id = id.Value, WarehouseName = textBoxName.Text });
-                }
-                else
-                {
-                    logic.AddElement(new WarehouseBindingModel { WarehouseName = textBoxName.Text });
-                }
+                    Id = id,
+                    WarehouseName = textBoxName.Text
+                });
 
                 MessageBox.Show("Сохранение прошло успешно", "Сообщение", MessageBoxButtons.OK, MessageBoxIcon.Information);
                 DialogResult = DialogResult.OK;

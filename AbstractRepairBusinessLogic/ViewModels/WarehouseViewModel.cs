@@ -10,6 +10,6 @@ namespace RepairBusinessLogic.ViewModels
         public int Id { get; set; }
         [DisplayName("Название склада")]
         public string WarehouseName { get; set; }
-        public List<WarehouseMaterialViewModel> WarehouseMaterials { get; set; }
+        public Dictionary<int, (string, int)> WarehouseMaterials { get; set; }
     }
 }
