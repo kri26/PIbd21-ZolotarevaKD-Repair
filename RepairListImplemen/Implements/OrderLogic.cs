@@ -66,14 +66,13 @@ namespace RepairListImplement.Implements
             List<OrderViewModel> result = new List<OrderViewModel>();
             foreach (var order in source.Orders)
             {
-                if (model != null)
+                if (
+                    model != null && order.Id == model.Id
+                    || model.DateFrom.HasValue && model.DateTo.HasValue && order.DateCreate >= model.DateFrom && order.DateCreate <= model.DateTo
+                )
                 {
-                    if (order.Id == model.Id)
-                    {
-                        result.Add(CreateViewModel(order));
-                        break;
-                    }
-                    continue;
+                    result.Add(CreateViewModel(order));
+                    break;
                 }
                 result.Add(CreateViewModel(order));
             }

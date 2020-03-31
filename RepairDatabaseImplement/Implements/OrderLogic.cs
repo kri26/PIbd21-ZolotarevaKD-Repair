@@ -63,7 +63,11 @@ model.Id);
             {
                 return context.Orders
             .Include(rec => rec.RepairWork)
-            .Where(rec => model == null || rec.Id == model.Id)
+            .Where(
+                    rec => model == null
+                    || (rec.Id == model.Id && model.Id.HasValue)
+                    || (model.DateFrom.HasValue && model.DateTo.HasValue && rec.DateCreate >= model.DateFrom && rec.DateCreate <= model.DateTo)
+                )
             .Select(rec => new OrderViewModel
             {
                 Id = rec.Id,

@@ -18,12 +18,14 @@ namespace RepairView
     {
         [Dependency]
         public new IUnityContainer Container { get; set; }
-        private readonly MainLogic logic;
+        private readonly MainLogic mainLogic;
+        private readonly ReportLogic reportLogic;
         private readonly IOrderLogic orderLogic;
-        public FormMain(MainLogic logic, IOrderLogic orderLogic)
+        public FormMain(MainLogic mainLogic, ReportLogic reportLogic, IOrderLogic orderLogic)
         {
             InitializeComponent();
-            this.logic = logic;
+            this.mainLogic = mainLogic;
+            this.reportLogic = reportLogic;
             this.orderLogic = orderLogic;
         }
         private void LoadData()
@@ -75,7 +77,7 @@ namespace RepairView
                 int id = Convert.ToInt32(dataGridView.SelectedRows[0].Cells[0].Value);
                 try
                 {
-                    logic.TakeOrderInWork(new ChangeStatusBindingModel { OrderId = id });
+                    mainLogic.TakeOrderInWork(new ChangeStatusBindingModel { OrderId = id });
                     LoadData();
                 }
                 catch (Exception ex)
@@ -92,7 +94,7 @@ namespace RepairView
                 int id = Convert.ToInt32(dataGridView.SelectedRows[0].Cells[0].Value);
                 try
                 {
-                    logic.FinishOrder(new ChangeStatusBindingModel { OrderId = id });
+                    mainLogic.FinishOrder(new ChangeStatusBindingModel { OrderId = id });
                     LoadData();
                 }
                 catch (Exception ex)
@@ -109,7 +111,7 @@ namespace RepairView
                 int id = Convert.ToInt32(dataGridView.SelectedRows[0].Cells[0].Value);
                 try
                 {
-                    logic.PayOrder(new ChangeStatusBindingModel { OrderId = id });
+                    mainLogic.PayOrder(new ChangeStatusBindingModel { OrderId = id });
                     LoadData();
                 }
                 catch (Exception ex)
@@ -122,6 +124,30 @@ namespace RepairView
         private void buttonRef_Click(object sender, EventArgs e)
         {
             LoadData();
+        }
+
+        private void списокИзделийToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            using (var dialog = new SaveFileDialog { Filter = "docx|*.docx" })
+            {
+                if (dialog.ShowDialog() == DialogResult.OK)
+                {
+                    reportLogic.SaveProductsToWordFile(new ReportBindingModel { FileName = dialog.FileName });
+                    MessageBox.Show("Выполнено", "Успех", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                }
+            }
+        }
+
+        private void компонентыПоИзделиямToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            var form = Container.Resolve<FormReportRepairWorkMaterials>();
+            form.ShowDialog();
+        }
+
+        private void списокЗаказовToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            var form = Container.Resolve<FormReportOrders>();
+            form.ShowDialog();
         }
     }
 }

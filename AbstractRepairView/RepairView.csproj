@@ -189,6 +189,18 @@
     <Compile Include="FormRepairWorks.Designer.cs">
       <DependentUpon>FormRepairWorks.cs</DependentUpon>
     </Compile>
+    <Compile Include="FormReportOrder.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="FormReportOrder.Designer.cs">
+      <DependentUpon>FormReportOrder.cs</DependentUpon>
+    </Compile>
+    <Compile Include="FormReportRepairWorkMaterials.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="FormReportRepairWorkMaterials.Designer.cs">
+      <DependentUpon>FormReportRepairWorkMaterials.cs</DependentUpon>
+    </Compile>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <EmbeddedResource Include="FormMaterial.resx">
