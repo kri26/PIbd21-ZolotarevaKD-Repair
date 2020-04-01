@@ -178,7 +178,7 @@ namespace RepairFileImplement.Implements
             foreach (var pc in repairWorkMaterials)
             {
                 var warehouseMaterial = source.WarehouseMaterials.Where(rec => rec.MaterialId == pc.MaterialId);
-                int neededCount = pc.Count;
+                int neededCount = pc.Count * model.Count;
 
                 foreach (var wc in warehouseMaterial)
                 {
