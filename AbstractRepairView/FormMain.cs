@@ -1,4 +1,5 @@
-﻿using RepairBusinessLogic.BindingModels;
+﻿using AbstractRepairView;
+using RepairBusinessLogic.BindingModels;
 using RepairBusinessLogic.BusinessLogic;
 using RepairBusinessLogic.Interfaces;
 using System;
@@ -132,7 +133,7 @@ namespace RepairView
             {
                 if (dialog.ShowDialog() == DialogResult.OK)
                 {
-                    reportLogic.SaveProductsToWordFile(new ReportBindingModel { FileName = dialog.FileName });
+                    reportLogic.SaveMaterialsToWordFile(new ReportBindingModel { FileName = dialog.FileName });
                     MessageBox.Show("Выполнено", "Успех", MessageBoxButtons.OK, MessageBoxIcon.Information);
                 }
             }

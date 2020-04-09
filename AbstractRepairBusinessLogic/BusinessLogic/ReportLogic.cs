@@ -10,34 +10,34 @@ namespace RepairBusinessLogic.BusinessLogic
 {
     public class ReportLogic
     {
-        private readonly IComponentLogic componentLogic;
-        private readonly IProductLogic productLogic;
+        private readonly IMaterialLogic materialLogic;
+        private readonly IRepairWorkLogic repairWorkLogic;
         private readonly IOrderLogic orderLogic;
 
-        public ReportLogic(IProductLogic productLogic, IComponentLogic componentLogic, IOrderLogic orderLogic)
+        public ReportLogic(IRepairWorkLogic repairWorkLogic, IMaterialLogic materialLogic, IOrderLogic orderLogic)
         {
-            this.productLogic = productLogic;
-            this.componentLogic = componentLogic;
+            this.repairWorkLogic = repairWorkLogic;
+            this.materialLogic = materialLogic;
             this.orderLogic = orderLogic;
         }
 
-        public List<ReportProductComponentViewModel> GetProductComponent()
+        public List<ReportRepairWorkMaterialViewModel> GetRepairWorkMaterial()
         {
-            var components = componentLogic.Read(null);
-            var products = productLogic.Read(null);
-            var list = new List<ReportProductComponentViewModel>();
+            var materials = materialLogic.Read(null);
+            var repairWorks = repairWorkLogic.Read(null);
+            var list = new List<ReportRepairWorkMaterialViewModel>();
 
-            foreach (var product in products)
+            foreach (var repairWork in repairWorks)
             {
-                foreach (var component in components)
+                foreach (var material in materials)
                 {
-                    if (product.ProductComponents.ContainsKey(component.Id))
+                    if (repairWork.RepairWorkMaterials.ContainsKey(material.Id))
                     {
-                        var record = new ReportProductComponentViewModel
+                        var record = new ReportRepairWorkMaterialViewModel
                         {
-                            ProductName = product.ProductName,
-                            ComponentName = component.ComponentName,
-                            Count = product.ProductComponents[component.Id].Item2
+                            RepairWorkName = repairWork.RepairWorkName,
+                            MaterialName = material.MaterialName,
+                            Count = repairWork.RepairWorkMaterials[material.Id].Item2
                         };
 
                         list.Add(record);
@@ -57,7 +57,7 @@ namespace RepairBusinessLogic.BusinessLogic
             .Select(x => new ReportOrdersViewModel
             {
                 DateCreate = x.DateCreate,
-                ProductName = x.ProductName,
+                RepairWorkName = x.RepairWorkName,
                 Count = x.Count,
                 Sum = x.Sum,
                 Status = x.Status
@@ -65,13 +65,13 @@ namespace RepairBusinessLogic.BusinessLogic
             .ToList();
         }
 
-        public void SaveProductsToWordFile(ReportBindingModel model)
+        public void SaveRepairWorksToWordFile(ReportBindingModel model)
         {
             SaveToWord.CreateDoc(new WordInfo
             {
                 FileName = model.FileName,
                 Title = "Список изделий",
-                Products = productLogic.Read(null)
+                RepairWorks = repairWorkLogic.Read(null)
             });
         }
 
@@ -87,13 +87,13 @@ namespace RepairBusinessLogic.BusinessLogic
             });
         }
 
-        public void SaveProductComponentsToPdfFile(ReportBindingModel model)
+        public void SaveRepairWorkMaterialsToPdfFile(ReportBindingModel model)
         {
             SaveToPdf.CreateDoc(new PdfInfo
             {
                 FileName = model.FileName,
                 Title = "Список издлий с компонентами",
-                ProductComponents = GetProductComponent()
+                RepairWorkMaterials = GetRepairWorkMaterial()
             });
         }
     }

@@ -8,6 +8,6 @@ namespace RepairBusinessLogic.HelperModels
     {
         public string FileName { get; set; }
         public string Title { get; set; }
-        public List<ReportReparWorkMaterialViewModel> ProductComponents { get; set; }
+        public List<ReportRepairWorkMaterialViewModel> RepairWorkMaterials { get; set; }
     }
 }

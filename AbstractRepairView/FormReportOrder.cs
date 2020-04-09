@@ -4,6 +4,8 @@ using RepairBusinessLogic.BusinessLogic;
 using System;
 using System.Windows.Forms;
 using Unity;
+using System.Linq;
+using System.Collections.Generic;
 
 namespace RepairView
 {
@@ -80,7 +82,7 @@ namespace RepairView
 
                         foreach (var order in dict.Where(rec => rec.DateCreate.Date == date.Date))
                         {
-                            dataGridView.Rows.Add(new object[] { "", order.ProductName, order.Sum });
+                            dataGridView.Rows.Add(new object[] { "", order.RepairWorkName, order.Sum });
                             dateSum += order.Sum;
                         }
 

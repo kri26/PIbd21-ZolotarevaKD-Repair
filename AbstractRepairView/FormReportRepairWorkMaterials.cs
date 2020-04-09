@@ -1,6 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.ComponentModel;
+using System.MaterialModel;
 using Microsoft.Reporting.WinForms;
 using RepairBusinessLogic.BindingModels;
 using RepairBusinessLogic.BusinessLogic;
@@ -31,7 +31,7 @@ namespace AbstractRepairView
                 {
                     try
                     {
-                        logic.SaveProductComponentsToPdfFile(new ReportBindingModel
+                        logic.SaveRepairWorkMaterialsToPdfFile(new ReportBindingModel
                         {
                             FileName = dialog.FileName,
                         });
@@ -50,8 +50,8 @@ namespace AbstractRepairView
         {
             try
             {
-                var dataSource = logic.GetProductComponent();
-                ReportDataSource source = new ReportDataSource("DataSetProductComponent", dataSource);
+                var dataSource = logic.GetRepairWorkMaterial();
+                ReportDataSource source = new ReportDataSource("DataSetRepairWorkMaterial", dataSource);
                 reportViewer.LocalReport.DataSources.Add(source);
                 reportViewer.RefreshReport();
             }

@@ -27,11 +27,11 @@ namespace RepairBusinessLogic.BusinessLogic
                     }
                 }));
 
-                foreach (var product in info.Products)
+                foreach (var repairWork in info.RepairWorks)
                 {
                     docBody.AppendChild(CreateParagraph(new WordParagraph
                     {
-                        Texts = new List<string> { product.ProductName, " - " + product.Price.ToString() },
+                        Texts = new List<string> { repairWork.RepairWorkName, " - " + repairWork.Price.ToString() },
                         TextProperties = new WordParagraphProperties
                         {
                             Bold = true,

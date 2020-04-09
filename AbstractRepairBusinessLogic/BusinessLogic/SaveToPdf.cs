@@ -1,7 +1,7 @@
 ﻿using MigraDoc.DocumentObjectModel;
 using MigraDoc.DocumentObjectModel.Tables;
 using MigraDoc.Rendering;
-using ReinforcedConcreteFactoryBusinessLogic.HelperModels;
+using RepairBusinessLogic.HelperModels;
 using System.Collections.Generic;
 
 namespace RepairBusinessLogic.BusinessLogic
@@ -35,15 +35,15 @@ namespace RepairBusinessLogic.BusinessLogic
                 ParagraphAlignment = ParagraphAlignment.Center
             });
 
-            foreach (var pc in info.ProductComponents)
+            foreach (var pc in info.RepairWorkMaterials)
             {
                 CreateRow(new PdfRowParameters
                 {
                     Table = table,
                     Texts = new List<string>
                     {
-                        pc.ProductName,
-                        pc.ComponentName,
+                        pc.RepairWorkName,
+                        pc.MaterialName,
                         pc.Count.ToString()
                     },
                     Style = "Normal",

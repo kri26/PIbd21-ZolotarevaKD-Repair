@@ -31,7 +31,7 @@
             this.ButtonSaveToExcel = new System.Windows.Forms.Button();
             this.dataGridView = new System.Windows.Forms.DataGridView();
             this.Date = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.ProductName = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.RepairWorkName = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Price = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.ButtonMake = new System.Windows.Forms.Button();
             this.dateTimePickerTo = new System.Windows.Forms.DateTimePicker();
@@ -57,7 +57,7 @@
             this.dataGridView.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dataGridView.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
             this.Date,
-            this.ProductName,
+            this.RepairWorkName,
             this.Price});
             this.dataGridView.Location = new System.Drawing.Point(7, 45);
             this.dataGridView.Margin = new System.Windows.Forms.Padding(2);
@@ -71,10 +71,10 @@
             this.Date.HeaderText = "Дата";
             this.Date.Name = "Date";
             // 
-            // ProductName
+            // RepairWorkName
             // 
-            this.ProductName.HeaderText = "Заказ";
-            this.ProductName.Name = "ProductName";
+            this.RepairWorkName.HeaderText = "Заказ";
+            this.RepairWorkName.Name = "RepairWorkName";
             // 
             // Price
             // 
@@ -149,7 +149,7 @@
         private System.Windows.Forms.Button ButtonSaveToExcel;
         private System.Windows.Forms.DataGridView dataGridView;
         private System.Windows.Forms.DataGridViewTextBoxColumn Date;
-        private System.Windows.Forms.DataGridViewTextBoxColumn ProductName;
+        private System.Windows.Forms.DataGridViewTextBoxColumn RepairWorkName;
         private System.Windows.Forms.DataGridViewTextBoxColumn Price;
         private System.Windows.Forms.Button ButtonMake;
         private System.Windows.Forms.DateTimePicker dateTimePickerTo;
