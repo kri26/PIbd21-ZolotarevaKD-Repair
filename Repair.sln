@@ -9,9 +9,7 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "RepairBusinessLogic", "Abst
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "RepairFileImplement", "RepairFileImplement\RepairFileImplement.csproj", "{3119D9BD-F4C1-4AEA-977D-926B42D4795E}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "RepairFileImplement", "RepairFileImplement\RepairFileImplement.csproj", "{3119D9BD-F4C1-4AEA-977D-926B42D4795E}"
-EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RepairDatabaseImplement", "RepairDatabaseImplement\RepairDatabaseImplement.csproj", "{31FEAF62-F2FE-469F-8AAB-078806275B4F}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "RepairDatabaseImplement", "RepairDatabaseImplement\RepairDatabaseImplement.csproj", "{31FEAF62-F2FE-469F-8AAB-078806275B4F}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -31,6 +29,10 @@ Global
 		{3119D9BD-F4C1-4AEA-977D-926B42D4795E}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{3119D9BD-F4C1-4AEA-977D-926B42D4795E}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{3119D9BD-F4C1-4AEA-977D-926B42D4795E}.Release|Any CPU.Build.0 = Release|Any CPU
+		{31FEAF62-F2FE-469F-8AAB-078806275B4F}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{31FEAF62-F2FE-469F-8AAB-078806275B4F}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{31FEAF62-F2FE-469F-8AAB-078806275B4F}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{31FEAF62-F2FE-469F-8AAB-078806275B4F}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
