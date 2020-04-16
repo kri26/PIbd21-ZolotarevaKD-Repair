@@ -15,11 +15,7 @@ namespace RepairDatabaseImplement
             if (optionsBuilder.IsConfigured == false)
             {
                 optionsBuilder
-                    .UseSqlServer(
-                        @"Data Source=DESKTOP-CC2VPVP\SQLEXPRESS;
-                          Initial Catalog=RepairDatabase;
-                          Integrated Security=True;
-                          MultipleActiveResultSets=True;");
+                    .UseSqlServer(@"Data Source=LAPTOP-IMFQ926R\SQLEXPRESS;Initial Catalog=RepairDatabase;Integrated Security=True;MultipleActiveResultSets=True;");
             }
             base.OnConfiguring(optionsBuilder);
         }

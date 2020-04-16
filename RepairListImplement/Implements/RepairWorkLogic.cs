@@ -4,51 +4,56 @@ using RepairBusinessLogic.ViewModels;
 using RepairListImplement.Models;
 using System;
 using System.Collections.Generic;
-using System.Text;
 
 namespace RepairListImplement.Implements
 {
     public class RepairWorkLogic : IRepairWorkLogic
     {
         private readonly DataListSingleton source;
+
         public RepairWorkLogic()
         {
             source = DataListSingleton.GetInstance();
         }
+
         public void CreateOrUpdate(RepairWorkBindingModel model)
         {
             RepairWork tempRepairWork = model.Id.HasValue ? null : new RepairWork { Id = 1 };
-            foreach (var RepairWork in source.Assemblies)
+
+            foreach (var repairWork in source.RepairWorks)
             {
-                if (RepairWork.RepairWorkName == model.RepairWorkName && RepairWork.Id != model.Id)
+                if (repairWork.RepairWorkName == model.RepairWorkName && repairWork.Id != model.Id)
                 {
-                    throw new Exception("Уже есть сборка с таким названием");
+                    throw new Exception("Уже есть изделие с таким названием");
                 }
-                if (!model.Id.HasValue && RepairWork.Id >= tempRepairWork.Id)
+
+                if (!model.Id.HasValue && repairWork.Id >= tempRepairWork.Id)
                 {
-                    tempRepairWork.Id = RepairWork.Id + 1;
+                    tempRepairWork.Id = repairWork.Id + 1;
                 }
-                else if (model.Id.HasValue && RepairWork.Id == model.Id)
+                else if (model.Id.HasValue && repairWork.Id == model.Id)
                 {
-                    tempRepairWork = RepairWork;
+                    tempRepairWork = repairWork;
                 }
             }
+
             if (model.Id.HasValue)
             {
                 if (tempRepairWork == null)
                 {
                     throw new Exception("Элемент не найден");
                 }
+
                 CreateModel(model, tempRepairWork);
             }
             else
             {
-                source.Assemblies.Add(CreateModel(model, tempRepairWork));
+                source.RepairWorks.Add(CreateModel(model, tempRepairWork));
             }
         }
+
         public void Delete(RepairWorkBindingModel model)
         {
-            // удаляем записи по деталям при удалении сборки
             for (int i = 0; i < source.RepairWorkMaterials.Count; ++i)
             {
                 if (source.RepairWorkMaterials[i].RepairWorkId == model.Id)
@@ -56,101 +61,114 @@ namespace RepairListImplement.Implements
                     source.RepairWorkMaterials.RemoveAt(i--);
                 }
             }
-            for (int i = 0; i < source.Assemblies.Count; ++i)
+
+            for (int i = 0; i < source.RepairWorks.Count; ++i)
             {
-                if (source.Assemblies[i].Id == model.Id)
+                if (source.RepairWorks[i].Id == model.Id)
                 {
-                    source.Assemblies.RemoveAt(i);
+                    source.RepairWorks.RemoveAt(i);
                     return;
                 }
             }
+
             throw new Exception("Элемент не найден");
         }
-        private RepairWork CreateModel(RepairWorkBindingModel model, RepairWork RepairWork)
+
+        private RepairWork CreateModel(RepairWorkBindingModel model, RepairWork repairWork)
         {
-            RepairWork.RepairWorkName = model.RepairWorkName;
-            RepairWork.Price = model.Price;
-            //обновляем существующие детали и ищем максимальный идентификатор
-            int maxADId = 0;
+            repairWork.RepairWorkName = model.RepairWorkName;
+            repairWork.Price = model.Price;
+            int maxPCId = 0;
+
             for (int i = 0; i < source.RepairWorkMaterials.Count; ++i)
             {
-                if (source.RepairWorkMaterials[i].Id > maxADId)
+                if (source.RepairWorkMaterials[i].Id > maxPCId)
                 {
-                    maxADId = source.RepairWorkMaterials[i].Id;
+                    maxPCId = source.RepairWorkMaterials[i].Id;
                 }
-                if (source.RepairWorkMaterials[i].RepairWorkId == RepairWork.Id)
+
+                if (source.RepairWorkMaterials[i].RepairWorkId == repairWork.Id)
                 {
-                    // если в модели пришла запись детали с таким id
                     if (model.RepairWorkMaterials.ContainsKey(source.RepairWorkMaterials[i].MaterialId))
                     {
-                        // обновляем количество
                         source.RepairWorkMaterials[i].Count = model.RepairWorkMaterials[source.RepairWorkMaterials[i].MaterialId].Item2;
-                        // из модели убираем эту запись, чтобы остались только не просмотренные
                         model.RepairWorkMaterials.Remove(source.RepairWorkMaterials[i].MaterialId);
                     }
+
                     else
                     {
                         source.RepairWorkMaterials.RemoveAt(i--);
                     }
                 }
             }
-            // новые записи
-            foreach (var ad in model.RepairWorkMaterials)
+
+            foreach (var pc in model.RepairWorkMaterials)
             {
                 source.RepairWorkMaterials.Add(new RepairWorkMaterial
                 {
-                    Id = ++maxADId,
-                    RepairWorkId = RepairWork.Id,
-                    MaterialId = ad.Key,
-                    Count = ad.Value.Item2
+                    Id = ++maxPCId,
+                    RepairWorkId = repairWork.Id,
+                    MaterialId = pc.Key,
+                    Count = pc.Value.Item2
                 });
             }
-            return RepairWork;
+
+            return repairWork;
         }
+
         public List<RepairWorkViewModel> Read(RepairWorkBindingModel model)
         {
             List<RepairWorkViewModel> result = new List<RepairWorkViewModel>();
-            foreach (var RepairWork in source.Assemblies)
+
+            foreach (var repairWork in source.RepairWorks)
             {
                 if (model != null)
                 {
-                    if (RepairWork.Id == model.Id)
+                    if (repairWork.Id == model.Id)
                     {
-                        result.Add(CreateViewModel(RepairWork));
+                        result.Add(CreateViewModel(repairWork));
                         break;
                     }
+
                     continue;
                 }
-                result.Add(CreateViewModel(RepairWork));
+
+                result.Add(CreateViewModel(repairWork));
             }
+
             return result;
         }
-        private RepairWorkViewModel CreateViewModel(RepairWork RepairWork)
+
+        private RepairWorkViewModel CreateViewModel(RepairWork repairWork)
         {
-            // требуется дополнительно получить список деталей для сборки с названиями и их количество
-            Dictionary<int, (string, int)> RepairWorkMaterials = new Dictionary<int, (string, int)>();
-            foreach (var ad in source.RepairWorkMaterials)
+
+            Dictionary<int, (string, int)> repairWorkMaterials = new Dictionary<int, (string, int)>();
+
+            foreach (var pc in source.RepairWorkMaterials)
             {
-                if (ad.RepairWorkId == RepairWork.Id)
+                if (pc.RepairWorkId == repairWork.Id)
                 {
-                    string MaterialName = string.Empty;
-                    foreach (var Material in source.Materials)
+                    string materialName = string.Empty;
+
+                    foreach (var material in source.Materials)
                     {
-                        if (ad.MaterialId == Material.Id)
+                        if (pc.MaterialId == material.Id)
                         {
-                            MaterialName = Material.MaterialName;
+                            materialName = material.MaterialName;
                             break;
                         }
                     }
-                    RepairWorkMaterials.Add(ad.MaterialId, (MaterialName, ad.Count));
+
+                    repairWorkMaterials.Add(pc.MaterialId, (materialName, pc.Count));
                 }
             }
+
             return new RepairWorkViewModel
             {
-                Id = RepairWork.Id,
-                RepairWorkName = RepairWork.RepairWorkName,
-                Price = RepairWork.Price,
-                RepairWorkMaterials = RepairWorkMaterials
+                Id = repairWork.Id,
+                RepairWorkName = repairWork.RepairWorkName,
+                Price = repairWork.Price,
+                RepairWorkMaterials = repairWorkMaterials
             };
         }
     }

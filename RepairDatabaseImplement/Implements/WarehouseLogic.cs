@@ -88,15 +88,14 @@ namespace RepairDatabaseImplement.Implements
                 }
                 else
                 {
-
                     element = new WarehouseMaterial();
-
                     context.WarehouseMaterials.Add(element);
+                    element.Count = model.Count;
                 }
 
                 element.WarehouseId = model.WarehouseId;
                 element.MaterialId = model.MaterialId;
-                element.Count = model.Count;
+                
 
                 context.SaveChanges();
             }

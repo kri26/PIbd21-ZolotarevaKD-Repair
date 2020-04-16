@@ -170,10 +170,9 @@ namespace RepairListImplement.Implements
             return true;
         }
 
-        public bool WriteOffMaterials(OrderViewModel model)
+        public void WriteOffMaterials(OrderViewModel model)
         {
             // Заглушка
-            return false;
         }
     }
 }

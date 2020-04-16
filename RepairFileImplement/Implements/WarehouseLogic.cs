@@ -64,7 +64,7 @@ namespace RepairFileImplement.Implements
 
         public void AddMaterial(WarehouseMaterialBindingModel model)
         {
-            Warehouse warehouse = source.Warehouses.FirstOrDefault(rec => rec.Id == model.WarehouseId);
+            /*Warehouse warehouse = source.Warehouses.FirstOrDefault(rec => rec.Id == model.WarehouseId);
 
             if (warehouse == null)
             {
@@ -76,7 +76,7 @@ namespace RepairFileImplement.Implements
             if (material == null)
             {
                 throw new Exception("Компонент не найден");
-            }
+            }*/
 
             WarehouseMaterial element = source.WarehouseMaterials
                         .FirstOrDefault(rec => rec.WarehouseId == model.WarehouseId && rec.MaterialId == model.MaterialId);
@@ -150,15 +150,15 @@ namespace RepairFileImplement.Implements
 
         public void WriteOffMaterials(OrderViewModel model)
         {
-            var repairWork = source.RepairWorks.Where(rec => rec.Id == model.RepairWorkId).FirstOrDefault();
-
+           // var repairWork = source.RepairWorks.Where(rec => rec.Id == model.RepairWorkId).FirstOrDefault();
+           /*
             if (repairWork == null)
             {
                 throw new Exception("Заказ не найден");
-            }
+            }*/
 
-            var repairWorkMaterials = source.RepairWorkMaterials.Where(rec => rec.RepairWorkId == repairWork.Id).ToList();
-
+            var repairWorkMaterials = source.RepairWorkMaterials.Where(rec => rec.Id == model.RepairWorkId).ToList();
+           
             if (repairWorkMaterials == null)
             {
                 throw new Exception("Не найдена связь продукта с компонентами");
@@ -175,7 +175,7 @@ namespace RepairFileImplement.Implements
                 }
             else 
                 {
-                    int neededCount = pc.Count;
+                    int neededCount = pc.Count * model.Count;
 
                     foreach (var wc in warehouseMaterial)
                     {

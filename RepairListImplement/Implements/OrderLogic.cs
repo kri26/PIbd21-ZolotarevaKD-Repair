@@ -93,7 +93,7 @@ namespace RepairListImplement.Implements
         private OrderViewModel CreateViewModel(Order order)
         {
             string RepairWorkName = "";
-            foreach (var RepairWork in source.Assemblies)
+            foreach (var RepairWork in source.RepairWorks)
             {
                 if (RepairWork.Id == order.RepairWorkId)
                 {
