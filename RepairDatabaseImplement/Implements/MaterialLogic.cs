@@ -1,11 +1,12 @@
-﻿using RepairBusinessLogic.BindingModels;
-using RepairBusinessLogic.Interfaces;
-using RepairBusinessLogic.ViewModels;
-using RepairDatabaseImplement;
-using RepairDatabaseImplement.Models;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+using RepairBusinessLogic.BindingModels;
+using RepairBusinessLogic.Interfaces;
+using RepairBusinessLogic.ViewModels;
+using RepairDatabaseImplement.Models;
 
 namespace RepairDatabaseImplement.Implements
 {
@@ -15,17 +16,18 @@ namespace RepairDatabaseImplement.Implements
         {
             using (var context = new RepairDatabase())
             {
-                Material element = context.Materials.FirstOrDefault(rec =>
-               rec.MaterialName == model.MaterialName && rec.Id != model.Id);
+                Material element = context.Materials.FirstOrDefault(rec => rec.MaterialName == model.MaterialName && rec.Id != model.Id);
+
                 if (element != null)
                 {
-                    throw new Exception("Уже есть продукт с таким названием");
+                    throw new Exception("Уже есть компонент с таким названием");
                 }
+
                 if (model.Id.HasValue)
                 {
-                    element = context.Materials.FirstOrDefault(rec => rec.Id ==
-                   model.Id);
-                if (element == null)
+                    element = context.Materials.FirstOrDefault(rec => rec.Id == model.Id);
+
+                    if (element == null)
                     {
                         throw new Exception("Элемент не найден");
                     }
@@ -35,16 +37,19 @@ namespace RepairDatabaseImplement.Implements
                     element = new Material();
                     context.Materials.Add(element);
                 }
+
                 element.MaterialName = model.MaterialName;
+
                 context.SaveChanges();
             }
         }
+
         public void Delete(MaterialBindingModel model)
         {
             using (var context = new RepairDatabase())
             {
-                Material element = context.Materials.FirstOrDefault(rec => rec.Id ==
-               model.Id);
+                Material element = context.Materials.FirstOrDefault(rec => rec.Id == model.Id);
+
                 if (element != null)
                 {
                     context.Materials.Remove(element);
@@ -56,6 +61,7 @@ namespace RepairDatabaseImplement.Implements
                 }
             }
         }
+
         public List<MaterialViewModel> Read(MaterialBindingModel model)
         {
             using (var context = new RepairDatabase())
@@ -70,4 +76,5 @@ namespace RepairDatabaseImplement.Implements
                 .ToList();
             }
         }
-    }}
+    }
+}

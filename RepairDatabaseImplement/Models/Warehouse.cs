@@ -8,17 +8,13 @@ using System.ComponentModel.DataAnnotations.Schema;
 
 namespace RepairDatabaseImplement.Models
 {
-    public class Material
+    public class Warehouse
     {
         public int Id { get; set; }
 
         [Required]
-        public string MaterialName { get; set; }
+        public string WarehouseName { get; set; }
 
-        [ForeignKey("MaterialId")]
-        public virtual List<RepairWorkMaterial> RepairWorkMaterials { get; set; }
-
-        [ForeignKey("MaterialId")]
-        public virtual List<WarehouseMaterial> WarehouseMaterials { get; set; }
+        public virtual WarehouseMaterial WarehouseMaterial { get; set; }
     }
 }

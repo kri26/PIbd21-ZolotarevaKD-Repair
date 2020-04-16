@@ -38,7 +38,9 @@ namespace RepairFileImplement.Implements
             }
             else
             {
+
                 int maxId = source.RepairWorks.Count > 0 ? source.RepairWorks.Max(rec => rec.Id) : 0;
+
                 element = new RepairWork { Id = maxId + 1 };
                 source.RepairWorks.Add(element);
             }

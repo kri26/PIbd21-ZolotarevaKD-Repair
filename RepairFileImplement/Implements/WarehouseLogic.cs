@@ -148,7 +148,7 @@ namespace RepairFileImplement.Implements
             .ToList();
         }
 
-        public bool WriteOffMaterials(OrderViewModel model)
+        public void WriteOffMaterials(OrderViewModel model)
         {
             var repairWork = source.RepairWorks.Where(rec => rec.Id == model.RepairWorkId).FirstOrDefault();
 
@@ -171,31 +171,27 @@ namespace RepairFileImplement.Implements
 
                 if (sum < pc.Count * model.Count)
                 {
-                    return false;
+                    throw new Exception("На складах недостаточно компонентов");
                 }
-            }
-
-            foreach (var pc in repairWorkMaterials)
-            {
-                var warehouseMaterial = source.WarehouseMaterials.Where(rec => rec.MaterialId == pc.MaterialId);
-                int neededCount = pc.Count * model.Count;
-
-                foreach (var wc in warehouseMaterial)
+            else 
                 {
-                    if (wc.Count >= neededCount)
+                    int neededCount = pc.Count;
+
+                    foreach (var wc in warehouseMaterial)
                     {
-                        wc.Count -= neededCount;
-                        break;
-                    }
-                    else
-                    {
-                        neededCount -= wc.Count;
-                        wc.Count = 0;
+                        if (wc.Count >= neededCount)
+                        {
+                            wc.Count -= neededCount;
+                            break;
+                        }
+                        else
+                        {
+                            neededCount -= wc.Count;
+                            wc.Count = 0;
+                        }
                     }
                 }
             }
-
-            return true;
         }
     }
 }

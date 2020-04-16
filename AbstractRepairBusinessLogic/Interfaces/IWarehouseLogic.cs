@@ -10,6 +10,6 @@ namespace RepairBusinessLogic.Interfaces
         void CreateOrUpdate(WarehouseBindingModel model);
         void Delete(WarehouseBindingModel model);
         void AddMaterial(WarehouseMaterialBindingModel model);
-        bool WriteOffMaterials(OrderViewModel model);
+        void WriteOffMaterials(OrderViewModel model);
     }
 }
