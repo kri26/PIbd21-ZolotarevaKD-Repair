@@ -1,10 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.MaterialModel;
 using Microsoft.Reporting.WinForms;
 using RepairBusinessLogic.BindingModels;
 using RepairBusinessLogic.BusinessLogic;
-using System;
 using System.Windows.Forms;
 using Unity;
 
@@ -59,6 +57,11 @@ namespace AbstractRepairView
             {
                 MessageBox.Show(ex.Message, "Ошибка", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
+        }
+
+        private void FormReportRepairWorkMaterials_Load(object sender, EventArgs e)
+        {
+
         }
     }
 }

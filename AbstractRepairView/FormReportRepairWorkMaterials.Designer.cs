@@ -34,33 +34,37 @@
             // 
             // reportViewer
             // 
-            this.reportViewer.LocalReport.ReportEmbeddedResource = "ReinforcedConcreteFactoryView.ReportOrders.rdlc";
-            this.reportViewer.Location = new System.Drawing.Point(3, 50);
+            this.reportViewer.LocalReport.ReportEmbeddedResource = "AbstractRepairView.ReportOrders.rdlc";
+            this.reportViewer.Location = new System.Drawing.Point(4, 62);
+            this.reportViewer.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.reportViewer.Name = "reportViewer";
             this.reportViewer.ServerReport.BearerToken = null;
-            this.reportViewer.Size = new System.Drawing.Size(1033, 535);
+            this.reportViewer.Size = new System.Drawing.Size(1377, 658);
             this.reportViewer.TabIndex = 1;
             this.reportViewer.Load += new System.EventHandler(this.reportViewer_Load);
             // 
             // ButtonToPdf
             // 
-            this.ButtonToPdf.Location = new System.Drawing.Point(12, 12);
+            this.ButtonToPdf.Location = new System.Drawing.Point(16, 15);
+            this.ButtonToPdf.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.ButtonToPdf.Name = "ButtonToPdf";
-            this.ButtonToPdf.Size = new System.Drawing.Size(137, 23);
+            this.ButtonToPdf.Size = new System.Drawing.Size(183, 28);
             this.ButtonToPdf.TabIndex = 6;
             this.ButtonToPdf.Text = "В PDF";
             this.ButtonToPdf.UseVisualStyleBackColor = true;
             this.ButtonToPdf.Click += new System.EventHandler(this.ButtonToPdf_Click);
             // 
-            // FormReportProductComponents
+            // FormReportRepairWorkMaterials
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(1041, 588);
+            this.ClientSize = new System.Drawing.Size(1388, 724);
             this.Controls.Add(this.ButtonToPdf);
             this.Controls.Add(this.reportViewer);
-            this.Name = "FormReportProductComponents";
+            this.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.Name = "FormReportRepairWorkMaterials";
             this.Text = "Компоненты и изделия";
+            this.Load += new System.EventHandler(this.FormReportRepairWorkMaterials_Load);
             this.ResumeLayout(false);
 
         }

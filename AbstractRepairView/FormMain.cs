@@ -133,7 +133,7 @@ namespace RepairView
             {
                 if (dialog.ShowDialog() == DialogResult.OK)
                 {
-                    reportLogic.SaveMaterialsToWordFile(new ReportBindingModel { FileName = dialog.FileName });
+                    reportLogic.SaveRepairWorksToWordFile(new ReportBindingModel { FileName = dialog.FileName });
                     MessageBox.Show("Выполнено", "Успех", MessageBoxButtons.OK, MessageBoxIcon.Information);
                 }
             }

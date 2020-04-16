@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Text;
 using RepairBusinessLogic.BindingModels;
 using RepairBusinessLogic.HelperModels;
@@ -92,7 +93,7 @@ namespace RepairBusinessLogic.BusinessLogic
             SaveToPdf.CreateDoc(new PdfInfo
             {
                 FileName = model.FileName,
-                Title = "Список издлий с компонентами",
+                Title = "Список изделий с компонентами",
                 RepairWorkMaterials = GetRepairWorkMaterial()
             });
         }
