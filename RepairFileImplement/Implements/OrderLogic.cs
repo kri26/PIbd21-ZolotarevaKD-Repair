@@ -35,6 +35,8 @@ namespace RepairFileImplement.Implements
                 source.Orders.Add(element);
             }
             element.RepairWorkId = model.RepairWorkId == 0 ? element.RepairWorkId : model.RepairWorkId;
+            element.ClientFIO = model.ClientFIO;
+            element.ClientId = model.ClientId;
             element.Count = model.Count;
             element.Sum = model.Sum;
             element.Status = model.Status;
@@ -66,6 +68,8 @@ namespace RepairFileImplement.Implements
             {
                 Id = rec.Id,
                 RepairWorkName = GetRepairWorkName(rec.RepairWorkId),
+                ClientFIO = rec.ClientFIO,
+                ClientId = rec.ClientId,
                 Count = rec.Count,
                 Sum = rec.Sum,
                 Status = rec.Status,

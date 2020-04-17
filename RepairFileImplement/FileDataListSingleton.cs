@@ -15,16 +15,19 @@ namespace RepairFileImplement
         private readonly string OrderFileName = "Order.xml";
         private readonly string RepairWorkFileName = "RepairWork.xml";
         private readonly string RepairWorkMaterialFileName = "RepairWorkMaterial.xml";
+        private readonly string ClientFileName = "Client.xml";
         public List<Material> Materials { get; set; }
         public List<Order> Orders { get; set; }
         public List<RepairWork> RepairWorks { get; set; }
         public List<RepairWorkMaterial> RepairWorkMaterials { get; set; }
+        public List<Client> Clients { set; get; }
         private FileDataListSingleton()
         {
             Materials = LoadMaterials();
             Orders = LoadOrders();
             RepairWorks = LoadRepairWorks();
             RepairWorkMaterials = LoadRepairWorkMaterials();
+            Clients = LoadClients();
         }
         public static FileDataListSingleton GetInstance()
         {
@@ -40,6 +43,28 @@ namespace RepairFileImplement
             SaveOrders();
             SaveRepairWorks();
             SaveRepairWorkMaterials();
+            SaveClients();
+        }
+
+        private List<Client> LoadClients()
+        {
+            var list = new List<Client>();
+            if (File.Exists(ClientFileName))
+            {
+                XDocument xDocument = XDocument.Load(ClientFileName);
+                var xElements = xDocument.Root.Elements("Client").ToList();
+                foreach (var elem in xElements)
+                {
+                    list.Add(new Client
+                    {
+                        Id = Convert.ToInt32(elem.Attribute("Id").Value),
+                        ClientFIO = elem.Element("ClientFIO").Value,
+                        Login = elem.Element("Login").Value,
+                        Password = elem.Element("Password").Value
+                    });
+                }
+            }
+            return list;
         }
         private List<Material> LoadMaterials()
         {
@@ -138,6 +163,24 @@ namespace RepairFileImplement
                 }
                 XDocument xDocument = new XDocument(xElement);
                 xDocument.Save(MaterialFileName);
+            }
+        }
+        private void SaveClients()
+        {
+            if (Clients != null)
+            {
+                var xElement = new XElement("Clients");
+                foreach (var client in Clients)
+                {
+                    xElement.Add(new XElement("Client",
+                    new XAttribute("Id", client.Id),
+                    new XElement("ClientFIO", client.ClientFIO),
+                    new XElement("Login", client.Login),
+                    new XElement("Password", client.Password)
+                    ));
+                }
+                XDocument xDocument = new XDocument(xElement);
+                xDocument.Save(ClientFileName);
             }
         }
         private void SaveOrders()

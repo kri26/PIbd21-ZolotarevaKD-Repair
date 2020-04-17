@@ -12,12 +12,14 @@ namespace RepairListImplement
         public List<Order> Orders { get; set; }
         public List<RepairWork> Assemblies { get; set; }
         public List<RepairWorkMaterial> RepairWorkMaterials { get; set; }
+        public List<Client> Clients { set; get; }
         private DataListSingleton()
         {
             Materials = new List<Material>();
             Orders = new List<Order>();
             Assemblies = new List<RepairWork>();
             RepairWorkMaterials = new List<RepairWorkMaterial>();
+            Clients = new List<Client>();
         }
         public static DataListSingleton GetInstance()
         {

@@ -17,5 +17,6 @@ namespace RepairDatabaseImplement
         public virtual DbSet<RepairWork> RepairWorks { set; get; }
         public virtual DbSet<RepairWorkMaterial> RepairWorkMaterials { set; get; }
         public virtual DbSet<Order> Orders { set; get; }
+        public virtual DbSet<Client> Clients { set; get; }
     }
 }
