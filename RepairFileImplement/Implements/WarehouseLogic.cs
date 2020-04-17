@@ -64,20 +64,6 @@ namespace RepairFileImplement.Implements
 
         public void AddMaterial(WarehouseMaterialBindingModel model)
         {
-            Warehouse warehouse = source.Warehouses.FirstOrDefault(rec => rec.Id == model.WarehouseId);
-
-            if (warehouse == null)
-            {
-                throw new Exception("Склад не найден");
-            }
-
-            Material material = source.Materials.FirstOrDefault(rec => rec.Id == model.MaterialId);
-
-            if (material == null)
-            {
-                throw new Exception("Компонент не найден");
-            }
-
             WarehouseMaterial element = source.WarehouseMaterials
                         .FirstOrDefault(rec => rec.WarehouseId == model.WarehouseId && rec.MaterialId == model.MaterialId);
 
@@ -150,14 +136,7 @@ namespace RepairFileImplement.Implements
 
         public bool WriteOffMaterials(OrderViewModel model)
         {
-            var repairWork = source.RepairWorks.Where(rec => rec.Id == model.RepairWorkId).FirstOrDefault();
-
-            if (repairWork == null)
-            {
-                throw new Exception("Заказ не найден");
-            }
-
-            var repairWorkMaterials = source.RepairWorkMaterials.Where(rec => rec.RepairWorkId == repairWork.Id).ToList();
+            var repairWorkMaterials = source.RepairWorkMaterials.Where(rec => rec.Id == model.RepairWorkId).ToList();
 
             if (repairWorkMaterials == null)
             {
