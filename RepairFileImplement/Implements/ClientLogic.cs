@@ -4,6 +4,7 @@ using System.Text;
 using RepairBusinessLogic.Interfaces;
 using RepairBusinessLogic.ViewModels;
 using RepairBusinessLogic.BindingModels;
+using RepairFileImplement.Models;
 using System.Linq;
 
 namespace RepairFileImplement.Implements

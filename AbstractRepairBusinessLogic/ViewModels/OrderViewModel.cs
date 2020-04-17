@@ -32,6 +32,9 @@ namespace RepairBusinessLogic.ViewModels
         [DataMember]
         [DisplayName("Дата выполнения")]
         public DateTime? DateImplement { get; set; }
-
+        [DataMember]
+        public int ClientId { set; get; }
+        [DataMember]
+        public string ClientFIO { set; get; }
     }
 }
