@@ -3,19 +3,48 @@ using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
 using System.Drawing;
-using System.Linq;
 using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 
 namespace RepairClientView
 {
-    public partial class Form1 : Form
+    public partial class FormEditProfile : Form
     {
-        public Form1()
+        public FormEditProfile()
         {
             InitializeComponent();
+            textBoxFIO.Text = Program.Client.ClientFIO;
+            textBoxLogin.Text = Program.Client.Login;
+            textBoxPassword.Text = Program.Client.Password;
         }
 
+        private void ButtonUpdate_Click(object sender, EventArgs e)
+        {
+            if (!string.IsNullOrEmpty(textBoxLogin.Text) &&
+           !string.IsNullOrEmpty(textBoxPassword.Text) &&
+           !string.IsNullOrEmpty(textBoxFIO.Text))
+            {
+                try
+                {
+                    //прописать запрос;
+                    MessageBox.Show("Обновление прошло успешно", "Сообщение",
+                   MessageBoxButtons.OK, MessageBoxIcon.Information);
+                    Program.Client.ClientFIO = textBoxFIO.Text;
+                    Program.Client.Email = textBoxLogin.Text;
+                    Program.Client.Password = textBoxPassword.Text;
+                    Close();
+                }
+                catch (Exception ex)
+                {
+                    MessageBox.Show(ex.Message, "Ошибка", MessageBoxButtons.OK,
+                   MessageBoxIcon.Error);
+                }
+            }
+            else
+            {
+                MessageBox.Show("Введите логин, пароль и ФИО", "Ошибка",
+               MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+        }
     }
 }
