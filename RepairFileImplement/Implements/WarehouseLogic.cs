@@ -137,7 +137,6 @@ namespace RepairFileImplement.Implements
         public void WriteOffMaterials(OrderViewModel model)
         {
             var repairWorkMaterials = source.RepairWorkMaterials.Where(rec => rec.Id == model.RepairWorkId).ToList();
-           
             if (repairWorkMaterials == null)
             {
                 throw new Exception("Не найдена связь продукта с компонентами");
