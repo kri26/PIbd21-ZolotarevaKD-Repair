@@ -18,23 +18,23 @@ namespace RepairRestApi.Controllers
     public class MainController : ControllerBase
     {
         private readonly IOrderLogic _order;
-        private readonly IRepairWorkLogic _RepairWork;
+        private readonly IRepairWorkLogic _repairWork;
         private readonly MainLogic _main;
 
         public MainController(IOrderLogic order, IRepairWorkLogic product, MainLogic main)
         {
             _order = order;
-            _RepairWork = product;
+            _repairWork = product;
             _main = main;
         }
 
         [HttpGet]
-        public List<RepairWork> GetRepairWorkList() => _RepairWork.Read(null)?.Select(rec => Convert(rec)).ToList();
+        public List<RepairWork> GetRepairWorkList() => _repairWork.Read(null)?.Select(rec => Convert(rec)).ToList();
 
         [HttpGet]
-        public RepairWork GetRepairWork(int RepairWorkId) => Convert(_RepairWork.Read(new RepairWorkBindingModel
+        public RepairWork GetRepairWork(int repairWorkId) => Convert(_repairWork.Read(new RepairWorkBindingModel
         {
-            Id = RepairWorkId
+            Id = repairWorkId
         })?[0]);
 
         [HttpGet]

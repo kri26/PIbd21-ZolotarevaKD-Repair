@@ -14,7 +14,7 @@ namespace RepairClientView
 
         public static void Connect()
         {
-            client.BaseAdRepairWork = new Uri(ConfigurationManager.AppSettings["IPAdRepairWork"]);
+            client.BaseAddress = new Uri(ConfigurationManager.AppSettings["IPAddress"]);
             client.DefaultRequestHeaders.Accept.Clear();
             client.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
         }

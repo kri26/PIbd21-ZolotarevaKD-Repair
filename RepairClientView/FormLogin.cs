@@ -16,21 +16,23 @@ namespace RepairClientView
         public FormLogin()
         {
             InitializeComponent();
-            //Program.Client = null;
+            Program.Client = null;
         }
+
         private void ButtonRegister_Click(object sender, EventArgs e)
         {
             FormRegister form = new FormRegister();
             form.ShowDialog();
         }
+
         private void ButtonLogin_Click(object sender, EventArgs e)
         {
-            if (!string.IsNullOrEmpty(textBox1.Text) &&
-           !string.IsNullOrEmpty(textBox2.Text))
+            if (!string.IsNullOrEmpty(textBoxLogin.Text) &&
+           !string.IsNullOrEmpty(textBoxPassword.Text))
             {
                 try
                 {
-                    //Program.Client = ApiClient.GetRequest<ClientViewModel>($"api/client/login?login={textBox1.Text}&password={ textBox2.Text}");
+                    Program.Client = ApiClient.GetRequest<ClientViewModel>($"api/client/login?login={textBoxLogin.Text}&password={ textBoxPassword.Text}");
                     Close();
                 }
                 catch (Exception ex)

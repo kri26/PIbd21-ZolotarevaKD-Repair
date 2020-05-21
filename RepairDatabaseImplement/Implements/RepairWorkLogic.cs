@@ -118,21 +118,17 @@ namespace RepairDatabaseImplement.Implements
         {
             using (var context = new RepairDatabase())
             {
-                return context.RepairWorks
-                .Where(rec => model == null || rec.Id == model.Id)
+                return context.RepairWorks.Where(rec => model == null || rec.Id == model.Id)
                 .ToList()
-               .Select(rec => new RepairWorkViewModel
-               {
-                   Id = rec.Id,
-                   RepairWorkName = rec.RepairWorkName,
-                   Price = rec.Price,
-                   RepairWorkMaterials = context.RepairWorkMaterials
-                .Include(recPC => recPC.Material)
-               .Where(recPC => recPC.RepairWorkId == rec.Id)
-               .ToDictionary(recPC => recPC.MaterialId, recPC =>
-                (recPC.Material?.MaterialName, recPC.Count))
-               })
-               .ToList();
+                .Select(rec => new RepairWorkViewModel
+                {
+                    Id = rec.Id,
+                    RepairWorkName = rec.RepairWorkName,
+                    Price = rec.Price,
+                    RepairWorkMaterials = context.RepairWorkMaterials.Include(recPC => recPC.Material)
+                                                           .Where(recPC => recPC.RepairWorkId == rec.Id)
+                                                           .ToDictionary(recPC => recPC.MaterialId, recPC => (recPC.Material?.MaterialName, recPC.Count))
+                }).ToList();
             }
         }
     }

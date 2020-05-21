@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Text;
 using System.Runtime.Serialization;
+using System.ComponentModel;
 
 namespace RepairBusinessLogic.ViewModels
 {
@@ -11,6 +12,7 @@ namespace RepairBusinessLogic.ViewModels
         [DataMember]
         public int Id { set; get; }
         [DataMember]
+        [DisplayName("ФИО клиента")]
         public string ClientFIO { set; get; }
         [DataMember]
         public string Login { set; get; }

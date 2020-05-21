@@ -1,6 +1,6 @@
 ﻿using RepairBusinessLogic.BusinessLogic;
 using RepairBusinessLogic.Interfaces;
-using RepairFileImplement.Implements;
+using RepairDatabaseImplement.Implements;
 using System;
 using System.Windows.Forms;
 using Unity;
@@ -33,6 +33,8 @@ namespace RepairView
             currentContainer.RegisterType<MainLogic>(
                 new HierarchicalLifetimeManager());
             currentContainer.RegisterType<ReportLogic>
+                (new HierarchicalLifetimeManager());
+            currentContainer.RegisterType<IClientLogic, ClientLogic>
                 (new HierarchicalLifetimeManager());
             return currentContainer;
         }

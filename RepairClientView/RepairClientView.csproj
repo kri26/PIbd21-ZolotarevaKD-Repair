@@ -12,7 +12,6 @@
 
   <ItemGroup>
     <ProjectReference Include="..\AbstractRepairBusinessLogic\RepairBusinessLogic.csproj" />
-    <ProjectReference Include="..\RepairRestApi\RepairRestApi.csproj" />
   </ItemGroup>
 
 </Project>

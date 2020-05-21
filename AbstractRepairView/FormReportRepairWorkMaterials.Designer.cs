@@ -1,4 +1,4 @@
-﻿namespace AbstractRepairView
+﻿namespace RepairView
 {
     partial class FormReportRepairWorkMaterials
     {
@@ -34,7 +34,7 @@
             // 
             // reportViewer
             // 
-            this.reportViewer.LocalReport.ReportEmbeddedResource = "AbstractRepairView.ReportOrders.rdlc";
+            this.reportViewer.LocalReport.ReportEmbeddedResource = "RepairView.ReportOrders.rdlc";
             this.reportViewer.Location = new System.Drawing.Point(4, 62);
             this.reportViewer.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.reportViewer.Name = "reportViewer";

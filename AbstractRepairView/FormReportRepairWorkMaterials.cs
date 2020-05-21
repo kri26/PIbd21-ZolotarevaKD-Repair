@@ -6,7 +6,7 @@ using RepairBusinessLogic.BusinessLogic;
 using System.Windows.Forms;
 using Unity;
 
-namespace AbstractRepairView
+namespace RepairView
 {
     public partial class FormReportRepairWorkMaterials : Form
     {

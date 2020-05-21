@@ -35,6 +35,7 @@ namespace RepairBusinessLogic.ViewModels
         [DataMember]
         public int ClientId { set; get; }
         [DataMember]
+        [DisplayName("ФИО клиента")]
         public string ClientFIO { set; get; }
     }
 }

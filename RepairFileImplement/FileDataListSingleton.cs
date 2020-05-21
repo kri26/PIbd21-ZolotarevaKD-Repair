@@ -22,7 +22,7 @@ namespace RepairFileImplement
         public List<Order> Orders { get; set; }
         public List<RepairWork> RepairWorks { get; set; }
         public List<RepairWorkMaterial> RepairWorkMaterials { get; set; }
-        public List<Client> Clients { set; get; }
+        public List<Models.Client> Clients { set; get; }
         private FileDataListSingleton()
         {
             Materials = LoadMaterials();
@@ -48,16 +48,16 @@ namespace RepairFileImplement
             SaveClients();
         }
 
-        private List<Client> LoadClients()
+        private List<Models.Client> LoadClients()
         {
-            var list = new List<Client>();
+            var list = new List<Models.Client>();
             if (File.Exists(ClientFileName))
             {
                 XDocument xDocument = XDocument.Load(ClientFileName);
                 var xElements = xDocument.Root.Elements("Client").ToList();
                 foreach (var elem in xElements)
                 {
-                    list.Add(new Client
+                    list.Add(new Models.Client
                     {
                         Id = Convert.ToInt32(elem.Attribute("Id").Value),
                         ClientFIO = elem.Element("ClientFIO").Value,

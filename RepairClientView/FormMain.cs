@@ -1,4 +1,5 @@
-﻿using System;
+﻿using RepairBusinessLogic.ViewModels;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
@@ -20,7 +21,7 @@ namespace RepairClientView
         {
             try
             {
-                //dataGridViewClientOrders.DataSource = //прописать запрос;
+                dataGridViewClientOrders.DataSource = ApiClient.GetRequest<List<OrderViewModel>>($"api/main/getorders?clientId={Program.Client.Id}");
                 dataGridViewClientOrders.Columns[0].Visible = false;
                 dataGridViewClientOrders.Columns[1].Visible = false;
                 dataGridViewClientOrders.Columns[2].Visible = false;
@@ -36,7 +37,7 @@ namespace RepairClientView
 
         private void UpdateDataToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            var form = new FormUpdateData();
+            var form = new FormEditProfile();
             form.ShowDialog();
         }
 

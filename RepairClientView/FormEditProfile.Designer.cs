@@ -94,6 +94,7 @@
             this.buttonSave.TabIndex = 6;
             this.buttonSave.Text = "Сохранить";
             this.buttonSave.UseVisualStyleBackColor = true;
+            this.buttonSave.Click += ButtonUpdate_Click;
             // 
             // buttonCancel
             // 
@@ -103,6 +104,7 @@
             this.buttonCancel.TabIndex = 7;
             this.buttonCancel.Text = "Отмена";
             this.buttonCancel.UseVisualStyleBackColor = true;
+            this.buttonCancel.Click += ButtonCancel_Click;
             // 
             // FormUpdateClientData
             // 

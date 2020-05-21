@@ -58,7 +58,8 @@ namespace RepairDatabaseImplement.Implements
             using (var context = new RepairDatabase())
             {
                 return context.Clients
-                .Where(rec => model == null || rec.Id == model.Id)
+                .Where(rec => model == null || rec.Id == model.Id ||
+                rec.Login == model.Login && rec.Password == model.Password)
                 .Select(rec => new ClientViewModel
                 {
                     Id = rec.Id,
