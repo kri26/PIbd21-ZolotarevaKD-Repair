@@ -4,7 +4,7 @@ using System;
 using System.Windows.Forms;
 using Unity;
 
-namespace AbstractRepairView
+namespace RepairView
 {
     public partial class FormWarehouses : Form
     {

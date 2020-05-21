@@ -1,4 +1,4 @@
-﻿namespace AbstractRepairView
+﻿namespace RepairView
 {
     partial class FormWarehouses
     {

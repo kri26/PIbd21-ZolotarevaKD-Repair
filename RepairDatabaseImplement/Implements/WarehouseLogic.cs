@@ -68,11 +68,9 @@ namespace RepairDatabaseImplement.Implements
                 {
                     Id = rec.Id,
                     WarehouseName = rec.WarehouseName,
-                    WarehouseMaterials = context.WarehouseMaterials.
-                                                Include(recSM => recSM.Material)
-                                                .Where(recSM => recSM.WarehouseId == rec.Id)
-                                                .ToDictionary(recSM => recSM.MaterialId, 
-                                                recSM => (recSM.Material?.MaterialName, recSM.Count))
+                    WarehouseMaterials = context.WarehouseMaterials.Include(recSM => recSM.Material)
+                                                           .Where(recSM => recSM.WarehouseId == rec.Id)
+                                                           .ToDictionary(recSM => recSM.Material.MaterialName, recSM => recSM.Count)
                 }).ToList();
             }
         }

@@ -1,10 +1,17 @@
-﻿using AbstractRepairView;
-using RepairBusinessLogic.BindingModels;
-using RepairBusinessLogic.BusinessLogic;
-using RepairBusinessLogic.Interfaces;
-using System;
+﻿using System;
+using System.Collections.Generic;
+using System.ComponentModel;
+using System.Data;
+using System.Drawing;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
 using System.Windows.Forms;
 using Unity;
+using RepairBusinessLogic.Interfaces;
+using RepairBusinessLogic.BindingModels;
+using RepairBusinessLogic.BusinessLogic;
+using AbstractRepairView;
 
 namespace RepairView
 {
@@ -14,55 +21,55 @@ namespace RepairView
         public new IUnityContainer Container { get; set; }
         private readonly MainLogic logic;
         private readonly IOrderLogic orderLogic;
-        public FormMain(MainLogic logic, IOrderLogic orderLogic)
+        private readonly ReportLogic report;
+
+        public FormMain(MainLogic logic, IOrderLogic orderLogic, ReportLogic report)
         {
             InitializeComponent();
             this.logic = logic;
             this.orderLogic = orderLogic;
+            this.report = report;
         }
-        private void LoadData()
-        {
-            try
-            {
-                var list = orderLogic.Read(null);
-                if (list != null)
-                {
-                    dataGridView.DataSource = list;
-                    dataGridView.Columns[0].Visible = false;
-                    dataGridView.Columns[1].Visible = false;
-                    dataGridView.Columns[2].AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill;
-                }
-            }
-            catch (Exception ex)
-            {
-                MessageBox.Show(ex.Message, "Ошибка", MessageBoxButtons.OK, MessageBoxIcon.Error);
-            }
-        }
+
         private void FormMain_Load(object sender, EventArgs e)
         {
             LoadData();
         }
 
-        private void материалToolStripMenuItem_Click(object sender, EventArgs e)
+        private void LoadData()
+        {
+            var listOrders = orderLogic.Read(null);
+            if (listOrders != null)
+            {
+                dataGridView.DataSource = listOrders;
+                dataGridView.Columns[0].Visible = false;
+                dataGridView.Columns[1].Visible = false;
+                dataGridView.Columns[2].AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill;
+                dataGridView.Columns[3].AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill;
+            }
+            dataGridView.Update();
+        }
+
+        private void MaterialsToolStripMenuItem_Click(object sender, EventArgs e)
         {
             var form = Container.Resolve<FormMaterials>();
             form.ShowDialog();
         }
 
-        private void ремонтныеРаботыToolStripMenuItem_Click(object sender, EventArgs e)
+        private void RepairWorksToolStripMenuItem_Click(object sender, EventArgs e)
         {
             var form = Container.Resolve<FormRepairWorks>();
             form.ShowDialog();
         }
 
-        private void buttonCreateOrder_Click(object sender, EventArgs e)
+        private void ButtonCreateOrder_Click(object sender, EventArgs e)
         {
             var form = Container.Resolve<FormCreateOrder>();
             form.ShowDialog();
             LoadData();
         }
 
-        private void buttonTakeOrderInWork_Click(object sender, EventArgs e)
+        private void ButtonTakeOrderInWork_Click(object sender, EventArgs e)
         {
             if (dataGridView.SelectedRows.Count == 1)
             {
@@ -79,7 +86,7 @@ namespace RepairView
             }
         }
 
-        private void buttonOrderReady_Click(object sender, EventArgs e)
+        private void ButtonOrderReady_Click(object sender, EventArgs e)
         {
             if (dataGridView.SelectedRows.Count == 1)
             {
@@ -95,12 +102,8 @@ namespace RepairView
                 }
             }
         }
-        private void складыToolStripMenuItem_Click(object sender, EventArgs e)
-        {
-            var form = Container.Resolve<FormWarehouses>();
-            form.ShowDialog();
-        }
-        private void buttonPayOrder_Click(object sender, EventArgs e)
+
+        private void ButtonPayOrder_Click(object sender, EventArgs e)
         {
             if (dataGridView.SelectedRows.Count == 1)
             {
@@ -112,20 +115,83 @@ namespace RepairView
                 }
                 catch (Exception ex)
                 {
-                    MessageBox.Show(ex.Message, "Ошибка", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    MessageBox.Show(ex.Message, "Ошибка", MessageBoxButtons.OK,
+                   MessageBoxIcon.Error);
                 }
             }
         }
 
-        private void buttonRef_Click(object sender, EventArgs e)
+        private void ButtonRef_Click(object sender, EventArgs e)
         {
             LoadData();
         }
 
-        private void buttonReplenishWarehouse_Click(object sender, EventArgs e)
+        private void списокМатериаловToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            using (var dialog = new SaveFileDialog { Filter = "docx|*.docx" })
+            {
+                if (dialog.ShowDialog() == DialogResult.OK)
+                {
+                    report.SaveRepairWorksToWordFile(new ReportBindingModel
+                    {
+                        FileName = dialog.FileName
+                    });
+                    MessageBox.Show("Выполнено", "Успех", MessageBoxButtons.OK,
+                   MessageBoxIcon.Information);
+                }
+            }
+        }
+
+        private void материалыДляРемонтаToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            var form = Container.Resolve<FormReportRepairWorkOrders>();
+            form.ShowDialog();
+        }
+
+        private void списокЗаказовToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            var form = Container.Resolve<FormReportRepairWorkMaterials>();
+            form.ShowDialog();
+        }
+
+        private void StorageToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            var form = Container.Resolve<FormWarehouses>();
+            form.ShowDialog();
+        }
+
+        private void AddStorageToolStripMenuItem_Click(object sender, EventArgs e)
         {
             var form = Container.Resolve<FormReplenishWarehouse>();
             form.ShowDialog();
+        }
+
+        private void материалыПоСкладамToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            var form = Container.Resolve<FormReportWarehouses>();
+            form.ShowDialog();
+        }
+
+        private void материалыНаСкладахToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            var form = Container.Resolve<FormReportRepairWorkMaterials>();
+            form.ShowDialog();
+        }
+
+        private void хранилищаToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            using (var dialog = new SaveFileDialog { Filter = "docx|*.docx" })
+            {
+                if (dialog.ShowDialog() == DialogResult.OK)
+                {
+                    report.SaveRepairWorksToWordFile(new ReportBindingModel
+                    {
+                        FileName = dialog.FileName
+                    });
+                    MessageBox.Show("Выполнено", "Успех", MessageBoxButtons.OK,
+                   MessageBoxIcon.Information);
+                }
+            }
         }
     }
 }

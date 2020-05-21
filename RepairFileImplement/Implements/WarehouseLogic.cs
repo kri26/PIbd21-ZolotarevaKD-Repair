@@ -82,7 +82,7 @@ namespace RepairFileImplement.Implements
             });
         }
 
-        private WarehouseViewModel CreateViewModel(Warehouse warehouse)
+   /*     private WarehouseViewModel CreateViewModel(Warehouse warehouse)
         {
 
             Dictionary<int, (string, int)> warehouseMaterials = new Dictionary<int, (string, int)>();
@@ -112,24 +112,19 @@ namespace RepairFileImplement.Implements
                 WarehouseName = warehouse.WarehouseName,
                 WarehouseMaterials = warehouseMaterials
             };
-        }
+        }*/
 
         public List<WarehouseViewModel> Read(WarehouseBindingModel model)
         {
             return source.Warehouses
-            .Where(rec => model == null || rec.Id == model.Id)
-            .Select(rec => new WarehouseViewModel
+             .Where(s => model == null || s.Id == model.Id)
+            .Select(s => new WarehouseViewModel
             {
-                Id = rec.Id,
-                WarehouseName = rec.WarehouseName,
+                Id = s.Id,
+                WarehouseName = s.WarehouseName,
                 WarehouseMaterials = source.WarehouseMaterials
-                                    .Where(recWC => recWC.WarehouseId == rec.Id)
-                                    .ToDictionary(
-                                        recWC => recWC.MaterialId,
-                                        recWC => (
-                                            source.Materials.FirstOrDefault(recC => recC.Id == recWC.MaterialId)?.MaterialName, recWC.Count
-                                            )
-                                        )
+                    .Where(sm => sm.WarehouseId == s.Id)
+                    .ToDictionary(k => source.Materials.FirstOrDefault(m => m.Id == k.MaterialId).MaterialName, k => k.Count)
             })
             .ToList();
         }

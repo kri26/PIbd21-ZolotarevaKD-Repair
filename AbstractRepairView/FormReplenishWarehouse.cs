@@ -7,7 +7,7 @@ using System.Windows.Forms;
 using Unity;
 using RepairBusinessLogic.BusinessLogic;
 
-namespace AbstractRepairView
+namespace RepairView
 {
     public partial class FormReplenishWarehouse : Form
     {

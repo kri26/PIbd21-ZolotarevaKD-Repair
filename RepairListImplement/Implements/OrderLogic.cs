@@ -69,10 +69,16 @@ namespace RepairListImplement.Implements
                 if (model != null)
                 {
                     if (order.Id == model.Id)
-                    {
-                        result.Add(CreateViewModel(order));
-                        break;
-                    }
+                        if (order.Id == model.Id && model.Id.HasValue)
+                        {
+                            result.Add(CreateViewModel(order));
+                            break;
+                        }
+                        else if (model.DateFrom.HasValue && model.DateTo.HasValue &&
+                           order.DateCreate >= model.DateFrom && order.DateCreate <= model.DateTo)
+                        {
+                            result.Add(CreateViewModel(order));
+                        }
                     continue;
                 }
                 result.Add(CreateViewModel(order));

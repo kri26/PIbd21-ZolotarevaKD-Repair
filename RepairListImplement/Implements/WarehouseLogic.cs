@@ -135,7 +135,7 @@ namespace RepairListImplement.Implements
         private WarehouseViewModel CreateViewModel(Warehouse warehouse)
         {
 
-            Dictionary<int, (string, int)> warehouseMaterials = new Dictionary<int, (string, int)>();
+            Dictionary<string, int> warehouseMaterials = new Dictionary<string, int>();
 
             foreach (var wc in source.WarehouseMaterials)
             {
@@ -152,7 +152,7 @@ namespace RepairListImplement.Implements
                         }
                     }
 
-                    warehouseMaterials.Add(wc.MaterialId, (MaterialName, wc.Count));
+                    warehouseMaterials.Add(MaterialName, wc.Count);
                 }
             }
 

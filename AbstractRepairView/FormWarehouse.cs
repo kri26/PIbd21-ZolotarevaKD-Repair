@@ -1,12 +1,13 @@
 ﻿using RepairBusinessLogic.BindingModels;
 using RepairBusinessLogic.Interfaces;
 using RepairBusinessLogic.ViewModels;
+using RepairView;
 using System;
 using System.Collections.Generic;
 using System.Windows.Forms;
 using Unity;
 
-namespace AbstractRepairView
+namespace RepairView
 {
     public partial class FormWarehouse : Form
     {
@@ -17,7 +18,7 @@ namespace AbstractRepairView
 
         private readonly IWarehouseLogic logic;
         private int? id;
-        private Dictionary<int, (string, int)> warehouseMaterials;
+        private Dictionary<string, int> warehouseMaterials;
 
         public FormWarehouse(IWarehouseLogic logic)
         {
@@ -46,7 +47,7 @@ namespace AbstractRepairView
             }
             else
             {
-                warehouseMaterials = new Dictionary<int, (string, int)>();
+                warehouseMaterials = new Dictionary<string, int>();
             }
         }
 
@@ -64,7 +65,7 @@ namespace AbstractRepairView
                     dataGridView.Columns[2].AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill;
                     foreach (var wc in warehouseMaterials)
                     {
-                        dataGridView.Rows.Add(new object[] { wc.Key, wc.Value.Item1, wc.Value.Item2 });
+                        dataGridView.Rows.Add(new object[] { "", wc.Key, wc.Value });
                     }
                 }
             }
