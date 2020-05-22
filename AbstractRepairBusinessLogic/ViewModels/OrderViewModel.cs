@@ -23,6 +23,8 @@ namespace RepairBusinessLogic.ViewModels
         [DataMember]
         [DisplayName("Сумма")]
         public decimal Sum { get; set; }
+        [DisplayName("Рабочий")]
+        public string ImplementerFIO { set; get; }
         [DataMember]
         [DisplayName("Статус")]
         public OrderStatus Status { get; set; }
@@ -37,5 +39,6 @@ namespace RepairBusinessLogic.ViewModels
         [DataMember]
         [DisplayName("ФИО клиента")]
         public string ClientFIO { set; get; }
+        public int? ImplementorId { set; get; }
     }
 }

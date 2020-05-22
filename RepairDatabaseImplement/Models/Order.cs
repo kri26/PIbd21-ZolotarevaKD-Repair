@@ -20,10 +20,13 @@ namespace RepairDatabaseImplement.Models
         public decimal Sum { get; set; }
         [Required]
         public OrderStatus Status { get; set; }
+        public int? ImplementerId { set; get; }
+        public string ImplementerFIO { set; get; }
         [Required]
         public DateTime DateCreate { get; set; }
         public DateTime? DateImplement { get; set; }
         public virtual Client Client { set; get; }
         public virtual RepairWork RepairWork { get; set; }
+        public virtual Implementer Implementer { set; get; }
     }
 }

@@ -9,10 +9,13 @@ namespace RepairBusinessLogic.BindingModels
     {
         public int? Id { get; set; }
         public int RepairWorkId { get; set; }
-        public int ClientId { set; get; }
+        public int? ClientId { set; get; }
         public string ClientFIO { set; get; }
         public int Count { get; set; }
         public decimal Sum { get; set; }
+        public string ImplementerFIO { set; get; }
+        public int? ImplementerId { set; get; }
+        public bool? FreeOrder { set; get; }
         public OrderStatus Status { get; set; }
         public DateTime DateCreate { get; set; }
         public DateTime? DateImplement { get; set; }

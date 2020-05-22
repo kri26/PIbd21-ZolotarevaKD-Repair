@@ -1,5 +1,6 @@
 ﻿using RepairBusinessLogic.Enums;
 using RepairFileImplement.Models;
+using RepairListImplemen.Models;
 using RepairListImplement.Models;
 using System;
 using System.Collections.Generic;
@@ -18,11 +19,13 @@ namespace RepairFileImplement
         private readonly string RepairWorkFileName = "RepairWork.xml";
         private readonly string RepairWorkMaterialFileName = "RepairWorkMaterial.xml";
         private readonly string ClientFileName = "Client.xml";
+        private readonly string ImplementerFileName = "Implementer.xml";
         public List<Material> Materials { get; set; }
         public List<Order> Orders { get; set; }
         public List<RepairWork> RepairWorks { get; set; }
         public List<RepairWorkMaterial> RepairWorkMaterials { get; set; }
         public List<Models.Client> Clients { set; get; }
+        public List<Implementer> Implementers { set; get; }
         private FileDataListSingleton()
         {
             Materials = LoadMaterials();
@@ -30,6 +33,7 @@ namespace RepairFileImplement
             RepairWorks = LoadRepairWorks();
             RepairWorkMaterials = LoadRepairWorkMaterials();
             Clients = LoadClients();
+            Implementers = LoadImplementers();
         }
         public static FileDataListSingleton GetInstance()
         {
@@ -46,6 +50,7 @@ namespace RepairFileImplement
             SaveRepairWorks();
             SaveRepairWorkMaterials();
             SaveClients();
+            SaveImplementers();
         }
 
         private List<Models.Client> LoadClients()
@@ -81,6 +86,24 @@ namespace RepairFileImplement
                     {
                         Id = Convert.ToInt32(elem.Attribute("Id").Value),
                         MaterialName = elem.Element("MaterialName").Value
+                    });
+                }
+            }
+            return list;
+        }
+        private List<Implementer> LoadImplementers()
+        {
+            var list = new List<Implementer>();
+            if (File.Exists(ImplementerFileName))
+            {
+                XDocument xDocument = XDocument.Load(ImplementerFileName);
+                var xElements = xDocument.Root.Elements("Implementor").ToList();
+                foreach (var elem in xElements)
+                {
+                    list.Add(new Implementer
+                    {
+                        Id = Convert.ToInt32(elem.Attribute("Id").Value),
+                        ImplementerFIO = elem.Element("ImplementerFIO").Value
                     });
                 }
             }
@@ -152,6 +175,22 @@ namespace RepairFileImplement
             }
             return list;
         }
+        private void SaveImplementers()
+        {
+            if (Implementers != null)
+            {
+                var xElement = new XElement("Implementers");
+                foreach (var implementer in Implementers)
+                {
+                    xElement.Add(new XElement("Implementer",
+                    new XAttribute("Id", implementer.Id),
+                    new XElement("ImplementerFIO", implementer.ImplementerFIO)));
+                }
+                XDocument xDocument = new XDocument(xElement);
+                xDocument.Save(MaterialFileName);
+            }
+        }
+
         private void SaveMaterials()
         {
             if (Materials != null)
