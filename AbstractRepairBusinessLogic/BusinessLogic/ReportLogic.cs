@@ -11,59 +11,49 @@ namespace RepairBusinessLogic.BusinessLogic
 {
     public class ReportLogic
     {
-        private readonly IMaterialLogic materialLogic;
         private readonly IRepairWorkLogic repairWorkLogic;
         private readonly IOrderLogic orderLogic;
 
         public ReportLogic(IRepairWorkLogic repairWorkLogic, IMaterialLogic materialLogic, IOrderLogic orderLogic)
         {
             this.repairWorkLogic = repairWorkLogic;
-            this.materialLogic = materialLogic;
             this.orderLogic = orderLogic;
         }
 
         public List<ReportRepairWorkMaterialViewModel> GetRepairWorkMaterial()
         {
-            var materials = materialLogic.Read(null);
             var repairWorks = repairWorkLogic.Read(null);
             var list = new List<ReportRepairWorkMaterialViewModel>();
 
             foreach (var repairWork in repairWorks)
             {
-                foreach (var material in materials)
+                foreach (var material in repairWork.RepairWorkMaterials)
                 {
-                    if (repairWork.RepairWorkMaterials.ContainsKey(material.Id))
+                    var record = new ReportRepairWorkMaterialViewModel
                     {
-                        var record = new ReportRepairWorkMaterialViewModel
-                        {
-                            RepairWorkName = repairWork.RepairWorkName,
-                            MaterialName = material.MaterialName,
-                            Count = repairWork.RepairWorkMaterials[material.Id].Item2
-                        };
+                        RepairWorkName = repairWork.RepairWorkName,
+                        MaterialName = material.Value.Item1,
+                        Count = material.Value.Item2
+                    };
 
-                        list.Add(record);
-                    }
+                    list.Add(record);
                 }
             }
             return list;
         }
 
-        public List<ReportOrdersViewModel> GetOrders(ReportBindingModel model)
+        public List<IGrouping<DateTime, OrderViewModel>> GetOrders(ReportBindingModel model)
         {
-            return orderLogic.Read(new OrderBindingModel
-            {
-                DateFrom = model.DateFrom,
-                DateTo = model.DateTo
-            })
-            .Select(x => new ReportOrdersViewModel
-            {
-                DateCreate = x.DateCreate,
-                RepairWorkName = x.RepairWorkName,
-                Count = x.Count,
-                Sum = x.Sum,
-                Status = x.Status
-            })
+            var list = orderLogic
+           .Read(new OrderBindingModel
+           {
+               DateFrom = model.DateFrom,
+               DateTo = model.DateTo
+           })
+            .GroupBy(rec => rec.DateCreate.Date)
+            .OrderBy(recG => recG.Key)
             .ToList();
+            return list;
         }
 
         public void SaveRepairWorksToWordFile(ReportBindingModel model)
@@ -78,8 +68,6 @@ namespace RepairBusinessLogic.BusinessLogic
 
         public void SaveOrdersToExcelFile(ReportBindingModel model)
         {
-            var a = GetOrders(model);
-
             SaveToExcel.CreateDoc(new ExcelInfo
             {
                 FileName = model.FileName,

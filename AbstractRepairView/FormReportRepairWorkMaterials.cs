@@ -58,10 +58,5 @@ namespace AbstractRepairView
                 MessageBox.Show(ex.Message, "Ошибка", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
-
-        private void FormReportRepairWorkMaterials_Load(object sender, EventArgs e)
-        {
-
-        }
     }
 }

@@ -64,7 +64,6 @@
             this.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.Name = "FormReportRepairWorkMaterials";
             this.Text = "Компоненты и изделия";
-            this.Load += new System.EventHandler(this.FormReportRepairWorkMaterials_Load);
             this.ResumeLayout(false);
 
         }

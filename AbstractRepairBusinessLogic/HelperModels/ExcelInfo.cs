@@ -1,5 +1,8 @@
 ﻿using RepairBusinessLogic.ViewModels;
+using System;
 using System.Collections.Generic;
+using System.Linq;
+using System.Text;
 
 namespace RepairBusinessLogic.HelperModels
 {
@@ -9,6 +12,6 @@ namespace RepairBusinessLogic.HelperModels
 
         public string Title { get; set; }
 
-        public List<ReportOrdersViewModel> Orders { get; set; }
+        public List<IGrouping<DateTime, OrderViewModel>> Orders { get; set; }
     }
 }
