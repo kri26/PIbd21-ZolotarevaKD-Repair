@@ -41,11 +41,13 @@ namespace RepairView
             var listOrders = orderLogic.Read(null);
             if (listOrders != null)
             {
+
                 dataGridView.DataSource = listOrders;
                 dataGridView.Columns[0].Visible = false;
                 dataGridView.Columns[1].Visible = false;
+                dataGridView.Columns[8].Visible = false;
                 dataGridView.Columns[3].Visible = false;
-                dataGridView.Columns[2].AutoSizeMode = DataGridViewAutoSizeColumnMode.DisplayedCells;
+                dataGridView.Columns[4].AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill;
             }
             dataGridView.Update();
         }
