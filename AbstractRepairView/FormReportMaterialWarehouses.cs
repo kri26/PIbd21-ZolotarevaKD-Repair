@@ -31,7 +31,7 @@ namespace RepairView
             try
             {
                 var dataSource = logic.GetMaterialWarehouses();
-                ReportDataSource source = new ReportDataSource("DataSetMaterialStorages", dataSource);
+                ReportDataSource source = new ReportDataSource("DataSetMaterialWarehouse", dataSource);
                 reportViewerMaterialWarehouses.LocalReport.DataSources.Add(source);
                 reportViewerMaterialWarehouses.RefreshReport();
             }

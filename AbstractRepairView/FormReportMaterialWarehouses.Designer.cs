@@ -39,9 +39,6 @@
             // 
             // reportViewerMaterialWarehouses
             // 
-            reportDataSource1.Name = "DataSetMaterialWarehouse";
-            reportDataSource1.Value = this.ReportMaterialWarehouseViewModelBindingSource;
-            this.reportViewerMaterialWarehouses.LocalReport.DataSources.Add(reportDataSource1);
             this.reportViewerMaterialWarehouses.LocalReport.ReportEmbeddedResource = "AbstractRepairView.ReportMaterialWarehouses.rdlc";
             this.reportViewerMaterialWarehouses.Location = new System.Drawing.Point(-1, 42);
             this.reportViewerMaterialWarehouses.Margin = new System.Windows.Forms.Padding(4);

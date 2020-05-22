@@ -106,7 +106,7 @@
           </TablixColumns>
           <TablixRows>
             <TablixRow>
-              <Height>0.52592cm</Height>
+              <Height>0.55767cm</Height>
               <TablixCells>
                 <TablixCell>
                   <CellContents>
@@ -140,7 +140,7 @@
                 </TablixCell>
                 <TablixCell>
                   <CellContents>
-                    <Textbox Name="Textbox3">
+                    <Textbox Name="Textbox4">
                       <CanGrow>true</CanGrow>
                       <KeepTogether>true</KeepTogether>
                       <Paragraphs>
@@ -154,7 +154,7 @@
                           <Style />
                         </Paragraph>
                       </Paragraphs>
-                      <rd:DefaultName>Textbox3</rd:DefaultName>
+                      <rd:DefaultName>Textbox4</rd:DefaultName>
                       <Style>
                         <Border>
                           <Color>LightGrey</Color>
@@ -201,7 +201,7 @@
               </TablixCells>
             </TablixRow>
             <TablixRow>
-              <Height>0.52592cm</Height>
+              <Height>0.55767cm</Height>
               <TablixCells>
                 <TablixCell>
                   <CellContents>
@@ -315,9 +315,9 @@
           </TablixMembers>
         </TablixRowHierarchy>
         <DataSetName>DataSetMaterialWarehouse</DataSetName>
-        <Top>0.80257cm</Top>
-        <Height>1.05184cm</Height>
-        <Width>11.1654cm</Width>
+        <Top>0.9084cm</Top>
+        <Height>1.11533cm</Height>
+        <Width>11.16539cm</Width>
         <ZIndex>3</ZIndex>
         <Style>
           <Border>
