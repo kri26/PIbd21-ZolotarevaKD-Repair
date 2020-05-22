@@ -28,15 +28,18 @@
         /// </summary>
         private void InitializeComponent()
         {
+            this.components = new System.ComponentModel.Container();
             this.buttonCreate = new System.Windows.Forms.Button();
             this.buttonCreateToPdf = new System.Windows.Forms.Button();
             this.reportViewer = new Microsoft.Reporting.WinForms.ReportViewer();
+            this.ReportMaterialWarehouseViewModelBindingSource = new System.Windows.Forms.BindingSource(this.components);
+            ((System.ComponentModel.ISupportInitialize)(this.ReportMaterialWarehouseViewModelBindingSource)).BeginInit();
             this.SuspendLayout();
             // 
             // buttonCreate
             // 
             this.buttonCreate.Location = new System.Drawing.Point(252, 4);
-            this.buttonCreate.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.buttonCreate.Margin = new System.Windows.Forms.Padding(4);
             this.buttonCreate.Name = "buttonCreate";
             this.buttonCreate.Size = new System.Drawing.Size(124, 25);
             this.buttonCreate.TabIndex = 2;
@@ -47,7 +50,7 @@
             // buttonCreateToPdf
             // 
             this.buttonCreateToPdf.Location = new System.Drawing.Point(425, 4);
-            this.buttonCreateToPdf.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.buttonCreateToPdf.Margin = new System.Windows.Forms.Padding(4);
             this.buttonCreateToPdf.Name = "buttonCreateToPdf";
             this.buttonCreateToPdf.Size = new System.Drawing.Size(112, 25);
             this.buttonCreateToPdf.TabIndex = 3;
@@ -57,14 +60,18 @@
             // 
             // reportViewer
             // 
-            this.reportViewer.LocalReport.ReportEmbeddedResource = "LabCSharp.Report.rdlc";
+            this.reportViewer.LocalReport.ReportEmbeddedResource = "AbstractRepairView.ReportOrders.rdlc";
             this.reportViewer.Location = new System.Drawing.Point(3, 39);
-            this.reportViewer.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.reportViewer.Margin = new System.Windows.Forms.Padding(4);
             this.reportViewer.Name = "reportViewer";
             this.reportViewer.ServerReport.BearerToken = null;
             this.reportViewer.Size = new System.Drawing.Size(802, 403);
             this.reportViewer.TabIndex = 4;
             this.reportViewer.Load += new System.EventHandler(this.FormReportRepairWorkMaterials_Load);
+            // 
+            // ReportMaterialWarehouseViewModelBindingSource
+            // 
+            this.ReportMaterialWarehouseViewModelBindingSource.DataSource = typeof(RepairBusinessLogic.ViewModels.ReportMaterialWarehouseViewModel);
             // 
             // FormReportRepairWorkMaterials
             // 
@@ -74,10 +81,11 @@
             this.Controls.Add(this.reportViewer);
             this.Controls.Add(this.buttonCreateToPdf);
             this.Controls.Add(this.buttonCreate);
-            this.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.Margin = new System.Windows.Forms.Padding(4);
             this.Name = "FormReportRepairWorkMaterials";
             this.Text = "Материалы по ремонту";
             this.Load += new System.EventHandler(this.FormReportRepairWorkMaterials_Load);
+            ((System.ComponentModel.ISupportInitialize)(this.ReportMaterialWarehouseViewModelBindingSource)).EndInit();
             this.ResumeLayout(false);
 
         }
@@ -86,5 +94,6 @@
         private System.Windows.Forms.Button buttonCreate;
         private System.Windows.Forms.Button buttonCreateToPdf;
         private Microsoft.Reporting.WinForms.ReportViewer reportViewer;
+        private System.Windows.Forms.BindingSource ReportMaterialWarehouseViewModelBindingSource;
     }
 }

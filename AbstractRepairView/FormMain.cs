@@ -174,7 +174,7 @@ namespace RepairView
 
         private void материалыНаСкладахToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            var form = Container.Resolve<FormReportRepairWorkMaterials>();
+            var form = Container.Resolve<FormReportMaterialWarehouses>();
             form.ShowDialog();
         }
 
@@ -184,7 +184,7 @@ namespace RepairView
             {
                 if (dialog.ShowDialog() == DialogResult.OK)
                 {
-                    report.SaveRepairWorksToWordFile(new ReportBindingModel
+                    report.SaveWarehousesToWordFile(new ReportBindingModel
                     {
                         FileName = dialog.FileName
                     });

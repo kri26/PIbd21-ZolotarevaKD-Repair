@@ -324,13 +324,19 @@
       <AutoGen>True</AutoGen>
       <DependentUpon>Resources.resx</DependentUpon>
     </Compile>
+    <EmbeddedResource Include="ReportMaterialWarehouses.rdlc" />
     <EmbeddedResource Include="ReportOrders.rdlc" />
     <None Include="packages.config" />
     <None Include="Properties\DataSources\RepairBusinessLogic.ViewModels.MaterialViewModel.datasource" />
     <None Include="Properties\DataSources\RepairBusinessLogic.ViewModels.OrderViewModel.datasource" />
     <None Include="Properties\DataSources\RepairBusinessLogic.ViewModels.RepairWorkViewModel.datasource" />
+    <None Include="Properties\DataSources\RepairBusinessLogic.ViewModels.ReportMaterialRepairWorksViewModel.datasource" />
+    <None Include="Properties\DataSources\RepairBusinessLogic.ViewModels.ReportMaterialWarehouseViewModel.datasource" />
     <None Include="Properties\DataSources\RepairBusinessLogic.ViewModels.ReportOrdersViewModel.datasource" />
     <None Include="Properties\DataSources\RepairBusinessLogic.ViewModels.ReportRepairWorkMaterialViewModel.datasource" />
+    <None Include="Properties\DataSources\RepairBusinessLogic.ViewModels.ReportWarehouseViewModel.datasource" />
+    <None Include="Properties\DataSources\RepairBusinessLogic.ViewModels.WarehouseMaterialViewModel.datasource" />
+    <None Include="Properties\DataSources\RepairBusinessLogic.ViewModels.WarehouseViewModel.datasource" />
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
       <LastGenOutput>Settings.Designer.cs</LastGenOutput>
