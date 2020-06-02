@@ -41,7 +41,7 @@ namespace RepairFileImplement.Implements
 
             element.RepairWorkId = model.RepairWorkId == 0 ? element.RepairWorkId : model.RepairWorkId;
             element.ClientFIO = model.ClientFIO;
-            element.ClientId = model.ClientId;
+            element.ClientId = model.ClientId.Value;
             element.Count = model.Count;
             element.Sum = model.Sum;
             element.Status = model.Status;
@@ -66,8 +66,9 @@ namespace RepairFileImplement.Implements
         public List<OrderViewModel> Read(OrderBindingModel model)
         {
             return source.Orders
-            .Where(rec => model == null || model.Id.HasValue && rec.Id == model.Id ||
-            (model.DateTo.HasValue && model.DateFrom.HasValue && rec.DateCreate >= model.DateFrom && rec.DateCreate <= model.DateTo))
+            .Where(rec => model == null || model.Id.HasValue && rec.Id == model.Id && rec.ClientId == model.ClientId ||
+            (model.DateTo.HasValue && model.DateFrom.HasValue && rec.DateCreate >= model.DateFrom && rec.DateCreate <= model.DateTo) ||
+            (model.ClientId.HasValue && rec.ClientId == model.ClientId))
             .Select(rec => new OrderViewModel
             {
                 Id = rec.Id,

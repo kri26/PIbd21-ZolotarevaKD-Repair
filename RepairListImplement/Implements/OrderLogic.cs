@@ -75,7 +75,9 @@ namespace RepairListImplement.Implements
                         {
                             result.Add(CreateViewModel(order));
                         }
-                    continue;
+                        else if (model.ClientId.HasValue && order.ClientId == model.ClientId)
+                            result.Add(CreateViewModel(order));
+                        continue;
                 }
                 result.Add(CreateViewModel(order));
             }
@@ -84,7 +86,7 @@ namespace RepairListImplement.Implements
         private Order CreateModel(OrderBindingModel model, Order order)
         {
             order.Count = model.Count;
-            order.ClientId = model.ClientId;
+            order.ClientId = model.ClientId.Value;
             order.ClientFIO = model.ClientFIO;
             order.DateCreate = model.DateCreate;
             order.DateImplement = model.DateImplement;

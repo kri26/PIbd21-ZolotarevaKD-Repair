@@ -36,7 +36,7 @@ namespace RepairDatabaseImplement.Implements
 
                 element.RepairWorkId = model.RepairWorkId == 0 ? element.RepairWorkId : model.RepairWorkId;
                 element.ClientFIO = model.ClientFIO;
-                element.ClientId = model.ClientId;
+                element.ClientId = model.ClientId.Value;
                 element.Count = model.Count;
                 element.Sum = model.Sum;
                 element.Status = model.Status;

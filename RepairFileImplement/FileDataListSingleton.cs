@@ -1,6 +1,5 @@
 ﻿using RepairBusinessLogic.Enums;
 using RepairFileImplement.Models;
-using RepairListImplement.Models;
 using System;
 using System.Collections.Generic;
 using System.IO;
@@ -28,7 +27,6 @@ namespace RepairFileImplement
         public List<RepairWorkMaterial> RepairWorkMaterials { get; set; }
         public List<Warehouse> Warehouses { get; set; }
         public List<WarehouseMaterial> WarehouseMaterials { get; set; }
-
         public List<Models.Client> Clients { set; get; }
         private FileDataListSingleton()
         {
@@ -62,7 +60,7 @@ namespace RepairFileImplement
             SaveClients();
         }
 
-        private List<Models.Client> LoadClients()
+        private List<Client> LoadClients()
         {
             var list = new List<Models.Client>();
             if (File.Exists(ClientFileName))

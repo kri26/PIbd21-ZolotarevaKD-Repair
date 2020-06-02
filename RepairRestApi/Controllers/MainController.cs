@@ -18,14 +18,16 @@ namespace RepairRestApi.Controllers
     public class MainController : ControllerBase
     {
         private readonly IOrderLogic _order;
+        private readonly IMaterialLogic materialLogic;
         private readonly IRepairWorkLogic _repairWork;
         private readonly MainLogic _main;
 
-        public MainController(IOrderLogic order, IRepairWorkLogic product, MainLogic main)
+        public MainController(IOrderLogic order, IRepairWorkLogic product, MainLogic main, IMaterialLogic materialLogic)
         {
             _order = order;
             _repairWork = product;
             _main = main;
+            this.materialLogic = materialLogic;
         }
 
         [HttpGet]

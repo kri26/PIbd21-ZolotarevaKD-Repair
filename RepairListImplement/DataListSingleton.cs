@@ -8,13 +8,13 @@ namespace RepairListImplement
         private static DataListSingleton instance;
 
         public List<Material> Materials { get; set; }
-
         public List<Order> Orders { get; set; }
-
         public List<RepairWork> RepairWorks { get; set; }
-
         public List<RepairWorkMaterial> RepairWorkMaterials { get; set; }
+        public List<Warehouse> Warehouses { get; set; }
+        public List<WarehouseMaterial> WarehouseMaterials { get; set; }
         public List<Client> Clients { set; get; }
+
         private DataListSingleton()
         {
             Materials = new List<Material>();

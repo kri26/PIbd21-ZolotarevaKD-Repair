@@ -360,24 +360,6 @@
     <None Include="App.config" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\AbstractRepairBusinessLogic\RepairBusinessLogic.csproj">
-      <Project>{6b590c56-9680-421c-976b-1217176b9851}</Project>
-      <Name>RepairBusinessLogic</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\RepairDatabaseImplement\RepairDatabaseImplement.csproj">
-      <Project>{31feaf62-f2fe-469f-8aab-078806275b4f}</Project>
-      <Name>RepairDatabaseImplement</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\RepairFileImplement\RepairFileImplement.csproj">
-      <Project>{3119d9bd-f4c1-4aea-977d-926b42d4795e}</Project>
-      <Name>RepairFileImplement</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\RepairListImplement\RepairListImplement.csproj">
-      <Project>{9c99ef39-6755-4ac2-99a2-2ca3663a8a53}</Project>
-      <Name>RepairListImplement</Name>
-    </ProjectReference>
-  </ItemGroup>
-  <ItemGroup>
     <Content Include="SqlServerTypes\readme.htm" />
     <Content Include="SqlServerTypes\x64\msvcr120.dll">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
@@ -401,9 +383,21 @@
       <Project>{31feaf62-f2fe-469f-8aab-078806275b4f}</Project>
       <Name>RepairDatabaseImplement</Name>
     </ProjectReference>
+    <ProjectReference Include="..\RepairDatabaseImplement\RepairDatabaseImplement.csproj">
+      <Project>{31feaf62-f2fe-469f-8aab-078806275b4f}</Project>
+      <Name>RepairDatabaseImplement</Name>
+    </ProjectReference>
     <ProjectReference Include="..\RepairFileImplement\RepairFileImplement.csproj">
       <Project>{3119d9bd-f4c1-4aea-977d-926b42d4795e}</Project>
       <Name>RepairFileImplement</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\RepairFileImplement\RepairFileImplement.csproj">
+      <Project>{3119d9bd-f4c1-4aea-977d-926b42d4795e}</Project>
+      <Name>RepairFileImplement</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\RepairListImplement\RepairListImplement.csproj">
+      <Project>{9c751835-636c-4e9c-943d-ac339679388f}</Project>
+      <Name>RepairListImplement</Name>
     </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

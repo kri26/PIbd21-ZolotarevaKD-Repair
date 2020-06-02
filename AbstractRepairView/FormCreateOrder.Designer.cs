@@ -47,7 +47,7 @@
             this.labelProduct.Name = "labelProduct";
             this.labelProduct.Size = new System.Drawing.Size(47, 13);
             this.labelProduct.TabIndex = 0;
-            this.labelProduct.Text = "Платье:";
+            this.labelProduct.Text = "Ремонтные работы:";
             // 
             // labelCount
             // 

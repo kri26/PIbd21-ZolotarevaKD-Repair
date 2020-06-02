@@ -31,6 +31,8 @@ namespace RepairRestApi
             services.AddTransient<IClientLogic, ClientLogic>();
             services.AddTransient<IOrderLogic, OrderLogic>();
             services.AddTransient<IRepairWorkLogic, RepairWorkLogic>();
+            services.AddTransient<IWarehouseLogic, WarehouseLogic>();
+            services.AddTransient<IMaterialLogic, MaterialLogic>();
             services.AddTransient<MainLogic>();
             services.AddControllers();
         }

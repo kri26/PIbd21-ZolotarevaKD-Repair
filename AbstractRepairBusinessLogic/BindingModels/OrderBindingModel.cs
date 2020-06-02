@@ -9,7 +9,7 @@ namespace RepairBusinessLogic.BindingModels
     {
         public int? Id { get; set; }
         public int RepairWorkId { get; set; }
-        public int ClientId { set; get; }
+        public int? ClientId { set; get; }
         public string ClientFIO { set; get; }
         public int Count { get; set; }
         public decimal Sum { get; set; }

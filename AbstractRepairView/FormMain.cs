@@ -11,7 +11,6 @@ using Unity;
 using RepairBusinessLogic.Interfaces;
 using RepairBusinessLogic.BindingModels;
 using RepairBusinessLogic.BusinessLogic;
-using RepairView;
 
 namespace RepairView
 {
@@ -38,15 +37,15 @@ namespace RepairView
 
         private void LoadData()
         {
-            try
+            var listOrders = orderLogic.Read(null);
+            if (listOrders != null)
             {
-
                 dataGridView.DataSource = listOrders;
                 dataGridView.Columns[0].Visible = false;
                 dataGridView.Columns[1].Visible = false;
-                dataGridView.Columns[8].Visible = false;
                 dataGridView.Columns[3].Visible = false;
-                dataGridView.Columns[4].AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill;
+                dataGridView.Columns[8].Visible = false;
+                dataGridView.Columns[2].AutoSizeMode = DataGridViewAutoSizeColumnMode.DisplayedCells;
             }
             dataGridView.Update();
         }
@@ -143,9 +142,9 @@ namespace RepairView
             }
         }
 
-        private void материалыДляРемонтаToolStripMenuItem_Click(object sender, EventArgs e)
+        private void материалыПоРемонтуToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            var form = Container.Resolve<FormReportRepairWorkOrders>();
+            var form = Container.Resolve<FormReportOrders>();
             form.ShowDialog();
         }
 
@@ -158,6 +157,30 @@ namespace RepairView
         private void клиентыToolStripMenuItem_Click(object sender, EventArgs e)
         {
             var form = Container.Resolve<FormClients>();
+            form.ShowDialog();
+        }
+
+        private void WarehouseToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            var form = Container.Resolve<FormWarehouses>();
+            form.ShowDialog();
+        }
+
+        private void AddWarehouseToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            var form = Container.Resolve<FormWarehouse>();
+            form.ShowDialog();
+        }
+
+        private void материалыПоСкладамToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            var form = Container.Resolve<FormReportWarehouses>();
+            form.ShowDialog();
+        }
+
+        private void материалыНаСкладахToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            var form = Container.Resolve<FormReportMaterialWarehouses>();
             form.ShowDialog();
         }
 
