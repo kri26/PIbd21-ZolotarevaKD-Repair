@@ -53,8 +53,10 @@ namespace RepairBusinessLogic.BusinessLogic
                     Sum = order.Sum,
                     ClientId = order.ClientId,
                     ClientFIO = order.ClientFIO,
+                    ImplementerFIO = model.ImplementerFIO,
+                    ImplementerId = model.ImplementerId.Value,
                     DateCreate = order.DateCreate,
-                    DateImplement = null,
+                    DateImplement = DateTime.Now,
                     Status = OrderStatus.Выполняется
                 });
             }
