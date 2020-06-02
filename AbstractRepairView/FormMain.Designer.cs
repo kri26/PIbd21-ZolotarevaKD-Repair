@@ -161,7 +161,7 @@
             // 
             this.buttonCreateOrder.Location = new System.Drawing.Point(602, 27);
             this.buttonCreateOrder.Name = "buttonCreateOrder";
-            this.buttonCreateOrder.Size = new System.Drawing.Size(154, 26);
+            this.buttonCreateOrder.Size = new System.Drawing.Size(189, 36);
             this.buttonCreateOrder.TabIndex = 2;
             this.buttonCreateOrder.Text = "Создать заказ";
             this.buttonCreateOrder.UseVisualStyleBackColor = true;

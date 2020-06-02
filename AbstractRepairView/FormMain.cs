@@ -11,7 +11,7 @@ using Unity;
 using RepairBusinessLogic.Interfaces;
 using RepairBusinessLogic.BindingModels;
 using RepairBusinessLogic.BusinessLogic;
-using AbstractRepairView;
+using RepairView;
 
 namespace RepairView
 {
@@ -38,14 +38,15 @@ namespace RepairView
 
         private void LoadData()
         {
-            var listOrders = orderLogic.Read(null);
-            if (listOrders != null)
+            try
             {
+
                 dataGridView.DataSource = listOrders;
                 dataGridView.Columns[0].Visible = false;
                 dataGridView.Columns[1].Visible = false;
-                dataGridView.Columns[2].AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill;
-                dataGridView.Columns[3].AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill;
+                dataGridView.Columns[8].Visible = false;
+                dataGridView.Columns[3].Visible = false;
+                dataGridView.Columns[4].AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill;
             }
             dataGridView.Update();
         }
@@ -154,27 +155,9 @@ namespace RepairView
             form.ShowDialog();
         }
 
-        private void StorageToolStripMenuItem_Click(object sender, EventArgs e)
+        private void клиентыToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            var form = Container.Resolve<FormWarehouses>();
-            form.ShowDialog();
-        }
-
-        private void AddStorageToolStripMenuItem_Click(object sender, EventArgs e)
-        {
-            var form = Container.Resolve<FormReplenishWarehouse>();
-            form.ShowDialog();
-        }
-
-        private void материалыПоСкладамToolStripMenuItem_Click(object sender, EventArgs e)
-        {
-            var form = Container.Resolve<FormReportWarehouses>();
-            form.ShowDialog();
-        }
-
-        private void материалыНаСкладахToolStripMenuItem_Click(object sender, EventArgs e)
-        {
-            var form = Container.Resolve<FormReportMaterialWarehouses>();
+            var form = Container.Resolve<FormClients>();
             form.ShowDialog();
         }
 

@@ -31,5 +31,6 @@ namespace RepairDatabaseImplement
         public virtual DbSet<Warehouse> Warehouses { set; get; }
 
         public virtual DbSet<WarehouseMaterial> WarehouseMaterials { set; get; }
+        public virtual DbSet<Client> Clients { set; get; }
     }
 }

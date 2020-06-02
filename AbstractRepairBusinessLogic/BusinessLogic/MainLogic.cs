@@ -23,6 +23,8 @@ namespace RepairBusinessLogic.BusinessLogic
             {
                 RepairWorkId = model.RepairWorkId,
                 Count = model.Count,
+                ClientId = model.ClientId,
+                ClientFIO = model.ClientFIO,
                 Sum = model.Sum,
                 DateCreate = DateTime.Now,
                 Status = OrderStatus.Принят
@@ -47,6 +49,8 @@ namespace RepairBusinessLogic.BusinessLogic
                 RepairWorkId = order.RepairWorkId,
                 Count = order.Count,
                 Sum = order.Sum,
+                ClientId = order.ClientId,
+                ClientFIO = order.ClientFIO,
                 DateCreate = order.DateCreate,
                 Status = OrderStatus.Выполняется
             });
@@ -68,6 +72,8 @@ namespace RepairBusinessLogic.BusinessLogic
                 RepairWorkId = order.RepairWorkId,
                 Count = order.Count,
                 Sum = order.Sum,
+                ClientId = order.ClientId,
+                ClientFIO = order.ClientFIO,
                 DateCreate = order.DateCreate,
                 DateImplement = DateTime.Now,
                 Status = OrderStatus.Готов
@@ -90,6 +96,8 @@ namespace RepairBusinessLogic.BusinessLogic
                 RepairWorkId = order.RepairWorkId,
                 Count = order.Count,
                 Sum = order.Sum,
+                ClientId = order.ClientId,
+                ClientFIO = order.ClientFIO,
                 DateCreate = order.DateCreate,
                 DateImplement = order.DateImplement,
                 Status = OrderStatus.Оплачен

@@ -21,10 +21,6 @@ namespace RepairListImplement.Implements
             Order tempOrder = model.Id.HasValue ? null : new Order { Id = 1 };
             foreach (var order in source.Orders)
             {
-                if (!model.Id.HasValue && order.Id >= order.Id)
-                {
-                    throw new Exception("Такой заказ уже существует");
-                }
                 if (!model.Id.HasValue && order.Id >= tempOrder.Id)
                 {
                     tempOrder.Id = order.Id + 1;
@@ -88,6 +84,8 @@ namespace RepairListImplement.Implements
         private Order CreateModel(OrderBindingModel model, Order order)
         {
             order.Count = model.Count;
+            order.ClientId = model.ClientId;
+            order.ClientFIO = model.ClientFIO;
             order.DateCreate = model.DateCreate;
             order.DateImplement = model.DateImplement;
             order.RepairWorkId = model.RepairWorkId;
@@ -111,6 +109,8 @@ namespace RepairListImplement.Implements
             {
                 Id = order.Id,
                 Count = order.Count,
+                ClientId = order.ClientId,
+                ClientFIO = order.ClientFIO,
                 DateCreate = order.DateCreate,
                 DateImplement = order.DateImplement,
                 RepairWorkName = RepairWorkName,

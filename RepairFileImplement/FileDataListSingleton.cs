@@ -1,5 +1,6 @@
 ﻿using RepairBusinessLogic.Enums;
 using RepairFileImplement.Models;
+using RepairListImplement.Models;
 using System;
 using System.Collections.Generic;
 using System.IO;
@@ -20,6 +21,7 @@ namespace RepairFileImplement
         private readonly string WarehouseFileName = "Warehouse.xml";
         private readonly string WarehouseMaterialFileName = "WarehouseMaterial.xml";
 
+        private readonly string ClientFileName = "Client.xml";
         public List<Material> Materials { get; set; }
         public List<Order> Orders { get; set; }
         public List<RepairWork> RepairWorks { get; set; }
@@ -27,6 +29,7 @@ namespace RepairFileImplement
         public List<Warehouse> Warehouses { get; set; }
         public List<WarehouseMaterial> WarehouseMaterials { get; set; }
 
+        public List<Models.Client> Clients { set; get; }
         private FileDataListSingleton()
         {
             Materials = LoadMaterials();
@@ -35,6 +38,7 @@ namespace RepairFileImplement
             RepairWorkMaterials = LoadRepairWorkMaterials();
             Warehouses = LoadWarehouses();
             WarehouseMaterials = LoadWarehouseMaterials();
+            Clients = LoadClients();
         }
 
         public static FileDataListSingleton GetInstance()
@@ -55,8 +59,29 @@ namespace RepairFileImplement
             SaveRepairWorkMaterials();
             SaveWarehouses();
             SaveWarehouseMaterials();
+            SaveClients();
         }
 
+        private List<Models.Client> LoadClients()
+        {
+            var list = new List<Models.Client>();
+            if (File.Exists(ClientFileName))
+            {
+                XDocument xDocument = XDocument.Load(ClientFileName);
+                var xElements = xDocument.Root.Elements("Client").ToList();
+                foreach (var elem in xElements)
+                {
+                    list.Add(new Models.Client
+                    {
+                        Id = Convert.ToInt32(elem.Attribute("Id").Value),
+                        ClientFIO = elem.Element("ClientFIO").Value,
+                        Login = elem.Element("Login").Value,
+                        Password = elem.Element("Password").Value
+                    });
+                }
+            }
+            return list;
+        }
         private List<Material> LoadMaterials()
         {
             var list = new List<Material>();
@@ -218,7 +243,24 @@ namespace RepairFileImplement
                 xDocument.Save(MaterialFileName);
             }
         }
-
+        private void SaveClients()
+        {
+            if (Clients != null)
+            {
+                var xElement = new XElement("Clients");
+                foreach (var client in Clients)
+                {
+                    xElement.Add(new XElement("Client",
+                    new XAttribute("Id", client.Id),
+                    new XElement("ClientFIO", client.ClientFIO),
+                    new XElement("Login", client.Login),
+                    new XElement("Password", client.Password)
+                    ));
+                }
+                XDocument xDocument = new XDocument(xElement);
+                xDocument.Save(ClientFileName);
+            }
+        }
         private void SaveOrders()
         {
             if (Orders != null)

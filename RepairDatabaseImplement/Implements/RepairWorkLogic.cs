@@ -123,8 +123,7 @@ namespace RepairDatabaseImplement.Implements
         {
             using (var context = new RepairDatabase())
             {
-                return context.RepairWorks
-                .Where(rec => model == null || rec.Id == model.Id)
+                return context.RepairWorks.Where(rec => model == null || rec.Id == model.Id)
                 .ToList()
                 .Select(rec => new RepairWorkViewModel
                 {
