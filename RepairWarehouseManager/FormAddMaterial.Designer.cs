@@ -34,8 +34,8 @@
             this.comboBoxComponent = new System.Windows.Forms.ComboBox();
             this.labelCountComponent = new System.Windows.Forms.Label();
             this.labelComponentName = new System.Windows.Forms.Label();
-            this.labelStorage = new System.Windows.Forms.Label();
-            this.comboBoxStorages = new System.Windows.Forms.ComboBox();
+            this.labelWarehouse = new System.Windows.Forms.Label();
+            this.comboBoxWarehouses = new System.Windows.Forms.ComboBox();
             this.SuspendLayout();
             // 
             // buttonCancel
@@ -89,32 +89,32 @@
             this.labelComponentName.Name = "labelComponentName";
             this.labelComponentName.Size = new System.Drawing.Size(127, 13);
             this.labelComponentName.TabIndex = 6;
-            this.labelComponentName.Text = "Текстильный материал";
+            this.labelComponentName.Text = "Материал";
             // 
             // label1
             // 
-            this.labelStorage.AutoSize = true;
-            this.labelStorage.Location = new System.Drawing.Point(69, 15);
-            this.labelStorage.Name = "label1";
-            this.labelStorage.Size = new System.Drawing.Size(65, 13);
-            this.labelStorage.TabIndex = 12;
-            this.labelStorage.Text = "Хранилище";
+            this.labelWarehouse.AutoSize = true;
+            this.labelWarehouse.Location = new System.Drawing.Point(69, 15);
+            this.labelWarehouse.Name = "label1";
+            this.labelWarehouse.Size = new System.Drawing.Size(65, 13);
+            this.labelWarehouse.TabIndex = 12;
+            this.labelWarehouse.Text = "Хранилище";
             // 
-            // comboBoxStorages
+            // comboBoxWarehouses
             // 
-            this.comboBoxStorages.FormattingEnabled = true;
-            this.comboBoxStorages.Location = new System.Drawing.Point(141, 12);
-            this.comboBoxStorages.Name = "comboBoxStorages";
-            this.comboBoxStorages.Size = new System.Drawing.Size(192, 21);
-            this.comboBoxStorages.TabIndex = 13;
+            this.comboBoxWarehouses.FormattingEnabled = true;
+            this.comboBoxWarehouses.Location = new System.Drawing.Point(141, 12);
+            this.comboBoxWarehouses.Name = "comboBoxWarehouses";
+            this.comboBoxWarehouses.Size = new System.Drawing.Size(192, 21);
+            this.comboBoxWarehouses.TabIndex = 13;
             // 
-            // FormStorageMaterials
+            // FormWarehouseMaterials
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(345, 126);
-            this.Controls.Add(this.comboBoxStorages);
-            this.Controls.Add(this.labelStorage);
+            this.Controls.Add(this.comboBoxWarehouses);
+            this.Controls.Add(this.labelWarehouse);
             this.Controls.Add(this.buttonCancel);
             this.Controls.Add(this.buttonSave);
             this.Controls.Add(this.textBoxCountComponent);
@@ -122,7 +122,7 @@
             this.Controls.Add(this.labelCountComponent);
             this.Controls.Add(this.labelComponentName);
             this.Load += new System.EventHandler(Load_Data);
-            this.Name = "FormStorageMaterials";
+            this.Name = "FormWarehouseMaterials";
             this.Text = "Добавление материала";
             this.ResumeLayout(false);
             this.PerformLayout();
@@ -137,7 +137,7 @@
         private System.Windows.Forms.ComboBox comboBoxComponent;
         private System.Windows.Forms.Label labelCountComponent;
         private System.Windows.Forms.Label labelComponentName;
-        private System.Windows.Forms.Label labelStorage;
-        private System.Windows.Forms.ComboBox comboBoxStorages;
+        private System.Windows.Forms.Label labelWarehouse;
+        private System.Windows.Forms.ComboBox comboBoxWarehouses;
     }
 }

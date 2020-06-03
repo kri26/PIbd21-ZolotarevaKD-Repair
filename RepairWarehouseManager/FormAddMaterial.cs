@@ -22,8 +22,8 @@ namespace RepairWarehouseManager
         {
             try
             {
-                comboBoxStorages.DataSource = ApiClient.GetRequest<List<WarehouseViewModel>>($"api/warehouse/getwarehouses");
-                comboBoxStorages.DisplayMember = "WarehouseName";
+                comboBoxWarehouses.DataSource = ApiClient.GetRequest<List<WarehouseViewModel>>($"api/warehouse/getwarehouses");
+                comboBoxWarehouses.DisplayMember = "WarehouseName";
                 comboBoxComponent.DataSource = ApiClient.GetRequest<List<MaterialViewModel>>($"api/main/getmaterials");
                 comboBoxComponent.DisplayMember = "MaterialName";
             }
@@ -37,13 +37,13 @@ namespace RepairWarehouseManager
         {
             try
             {
-                if (comboBoxStorages.SelectedItem != null && comboBoxComponent.SelectedItem != null &&
+                if (comboBoxWarehouses.SelectedItem != null && comboBoxComponent.SelectedItem != null &&
                     !string.IsNullOrEmpty(textBoxCountComponent.Text))
                 {
-                    ApiClient.PostRequest($"api/storage/addmaterialtowarehouse",
+                    ApiClient.PostRequest($"api/warehouse/addmaterialtowarehouse",
                         new WarehouseMaterialBindingModel()
                         {
-                            WarehouseId = (comboBoxStorages.SelectedItem as WarehouseViewModel).Id,
+                            WarehouseId = (comboBoxWarehouses.SelectedItem as WarehouseViewModel).Id,
                             MaterialId = (comboBoxComponent.SelectedItem as MaterialViewModel).Id,
                             Count = Convert.ToInt32(textBoxCountComponent.Text)
                         });

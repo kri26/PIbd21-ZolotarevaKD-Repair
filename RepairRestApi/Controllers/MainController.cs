@@ -58,5 +58,8 @@ namespace RepairRestApi.Controllers
                 Price = model.Price
             };
         }
+
+        [HttpGet]
+        public List<MaterialViewModel> GetMaterials() => materialLogic.Read(null);
     }
 }

@@ -8,29 +8,29 @@ using RepairBusinessLogic.ViewModels;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 
-namespace DressesShopRestApi.Controllers
+namespace RepairRestApi.Controllers
 {
     [Route("api/[controller]/[action]")]
     [ApiController]
-    public class StorageController : ControllerBase
+    public class WarehouseController : ControllerBase
     {
         private readonly IWarehouseLogic warehouseLogic;
 
-        public StorageController(IWarehouseLogic warehouseLogic)
+        public WarehouseController(IWarehouseLogic warehouseLogic)
         {
             this.warehouseLogic = warehouseLogic;
         }
 
         [HttpPost]
-        public void CreateOrUpdateStorage(WarehouseBindingModel model) => warehouseLogic.CreateOrUpdate(model);
+        public void CreateOrUpdateWarehouse(WarehouseBindingModel model) => warehouseLogic.CreateOrUpdate(model);
 
         [HttpPost]
-        public void AddMaterialToStorage(WarehouseMaterialBindingModel model) => warehouseLogic.AddMaterial(model);
+        public void AddMaterialToWarehouse(WarehouseMaterialBindingModel model) => warehouseLogic.AddMaterial(model);
 
         [HttpPost]
-        public void DeleteStorage(WarehouseBindingModel model) => warehouseLogic.Delete(model);
+        public void DeleteWarehouse(WarehouseBindingModel model) => warehouseLogic.Delete(model);
 
         [HttpGet]
-        public List<WarehouseViewModel> GetStorages() => warehouseLogic.Read(null);
+        public List<WarehouseViewModel> GetWarehouses() => warehouseLogic.Read(null);
     }
 }
