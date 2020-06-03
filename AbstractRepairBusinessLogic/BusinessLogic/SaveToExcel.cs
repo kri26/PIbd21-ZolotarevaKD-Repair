@@ -68,16 +68,8 @@ namespace RepairBusinessLogic.BusinessLogic
 
                 uint rowIndex = 2;
 
-                List<DateTime> dates = new List<DateTime>();
-                foreach (var order in info.Orders)
-                {
-                    if (!dates.Contains(order.DateCreate.Date))
-                    {
-                        dates.Add(order.DateCreate.Date);
-                    }
-                }
 
-                foreach (var date in dates)
+                foreach (var date in info.Orders)
                 {
                     decimal dateSum = 0;
 
@@ -87,13 +79,13 @@ namespace RepairBusinessLogic.BusinessLogic
                         ShareStringPart = shareStringPart,
                         ColumnName = "A",
                         RowIndex = rowIndex,
-                        Text = date.Date.ToString(),
+                        Text = date.Key.ToString(),
                         StyleIndex = 0U
                     });
 
                     rowIndex++;
 
-                    foreach (var order in info.Orders.Where(rec => rec.DateCreate.Date == date.Date))
+                    foreach (var order in date)
                     {
                         InsertCellInWorksheet(new ExcelCellParameters
                         {
