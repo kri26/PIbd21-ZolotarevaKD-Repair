@@ -15,6 +15,7 @@ namespace RepairListImplement
         public List<RepairWorkMaterial> RepairWorkMaterials { get; set; }
         public List<Client> Clients { set; get; }
         public List<Implementer> Implementers { set; get; }
+        public List<MessageInfo> MessageInfoes { get; set; }
         private DataListSingleton()
         {
             Materials = new List<Material>();
@@ -23,6 +24,7 @@ namespace RepairListImplement
             RepairWorkMaterials = new List<RepairWorkMaterial>();
             Clients = new List<Client>();
             Implementers = new List<Implementer>();
+            MessageInfoes = new List<MessageInfo>();
         }
         public static DataListSingleton GetInstance()
         {

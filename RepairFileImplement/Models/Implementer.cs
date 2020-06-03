@@ -4,9 +4,9 @@ using System.Text;
 
 namespace RepairFileImplement.Models
 {
-    public class Material
+    public class Implementer
     {
-        public int Id { get; set; }
-        public string MaterialName { get; set; }
+        public int Id { set; get; }
+        public string ImplementerFIO { set; get; }
     }
 }

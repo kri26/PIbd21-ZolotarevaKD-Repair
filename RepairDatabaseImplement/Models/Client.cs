@@ -17,5 +17,7 @@ namespace RepairDatabaseImplement.Models
         public string Password { set; get; }
         [ForeignKey("ClientId")]
         public virtual List<Order> Orders { set; get; }
+        [ForeignKey("ClientId")]
+        public virtual List<MessageInfo> MessageInfos { set; get; }
     }
 }
