@@ -15,6 +15,7 @@ namespace RepairDatabaseImplement.Models
         [Required]
         public string WarehouseName { get; set; }
 
-        public virtual WarehouseMaterial WarehouseMaterial { get; set; }
+        [ForeignKey("StorageId")]
+        public virtual List<WarehouseMaterial> WarehouseMaterial { get; set; }
     }
 }
