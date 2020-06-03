@@ -168,7 +168,7 @@ namespace RepairView
 
         private void AddWarehouseToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            var form = Container.Resolve<FormWarehouse>();
+            var form = Container.Resolve<FormReplenishWarehouse>();
             form.ShowDialog();
         }
 
