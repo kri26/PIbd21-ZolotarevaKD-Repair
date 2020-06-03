@@ -61,5 +61,10 @@ namespace RepairView
                 LoadData();
             }
         }
+
+        private void buttonUpdate_Click(object sender, EventArgs e)
+        {
+            LoadData();
+        }
     }
 }

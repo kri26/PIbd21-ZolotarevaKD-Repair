@@ -30,6 +30,7 @@
         {
             this.dataGridViewClients = new System.Windows.Forms.DataGridView();
             this.buttonDeleteClient = new System.Windows.Forms.Button();
+            this.buttonUpdate = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridViewClients)).BeginInit();
             this.SuspendLayout();
             // 
@@ -37,27 +38,43 @@
             // 
             this.dataGridViewClients.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dataGridViewClients.Location = new System.Drawing.Point(-1, 0);
+            this.dataGridViewClients.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.dataGridViewClients.Name = "dataGridViewClients";
-            this.dataGridViewClients.Size = new System.Drawing.Size(375, 318);
+            this.dataGridViewClients.RowHeadersWidth = 51;
+            this.dataGridViewClients.Size = new System.Drawing.Size(500, 391);
             this.dataGridViewClients.TabIndex = 0;
             // 
             // buttonDeleteClient
             // 
-            this.buttonDeleteClient.Location = new System.Drawing.Point(380, 12);
+            this.buttonDeleteClient.Location = new System.Drawing.Point(507, 15);
+            this.buttonDeleteClient.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.buttonDeleteClient.Name = "buttonDeleteClient";
-            this.buttonDeleteClient.Size = new System.Drawing.Size(106, 24);
+            this.buttonDeleteClient.Size = new System.Drawing.Size(141, 30);
             this.buttonDeleteClient.TabIndex = 1;
             this.buttonDeleteClient.Text = "Удалить";
             this.buttonDeleteClient.UseVisualStyleBackColor = true;
             this.buttonDeleteClient.Click += new System.EventHandler(this.buttonDeleteClient_Click);
             // 
+            // buttonUpdate
+            // 
+            this.buttonUpdate.Location = new System.Drawing.Point(507, 65);
+            this.buttonUpdate.Margin = new System.Windows.Forms.Padding(4);
+            this.buttonUpdate.Name = "buttonUpdate";
+            this.buttonUpdate.Size = new System.Drawing.Size(141, 30);
+            this.buttonUpdate.TabIndex = 2;
+            this.buttonUpdate.Text = "Обоновить";
+            this.buttonUpdate.UseVisualStyleBackColor = true;
+            this.buttonUpdate.Click += new System.EventHandler(this.buttonUpdate_Click);
+            // 
             // FormClients
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(490, 317);
+            this.ClientSize = new System.Drawing.Size(653, 390);
+            this.Controls.Add(this.buttonUpdate);
             this.Controls.Add(this.buttonDeleteClient);
             this.Controls.Add(this.dataGridViewClients);
+            this.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.Name = "FormClients";
             this.Text = "Клиенты";
             this.Load += new System.EventHandler(this.FormClients_Load);
@@ -70,5 +87,6 @@
 
         private System.Windows.Forms.DataGridView dataGridViewClients;
         private System.Windows.Forms.Button buttonDeleteClient;
+        private System.Windows.Forms.Button buttonUpdate;
     }
 }
