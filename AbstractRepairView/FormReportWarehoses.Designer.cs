@@ -59,7 +59,7 @@
             this.Controls.Add(this.buttonSaveToExcelWarehouses);
             this.Controls.Add(this.dataGridViewWarehouses);
             this.Name = "FormReportWarehouses";
-            this.Text = "FormReportWarehouses";
+            this.Text = "Отчет по сладам";
             this.Load += new System.EventHandler(this.FormReportWarehouses_Load);
             ((System.ComponentModel.ISupportInitialize)(this.dataGridViewWarehouses)).EndInit();
             this.ResumeLayout(false);

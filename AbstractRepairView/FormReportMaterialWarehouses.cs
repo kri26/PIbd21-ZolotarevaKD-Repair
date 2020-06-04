@@ -62,10 +62,5 @@ namespace RepairView
                 }
             }
         }
-
-        private void FormReportMaterialWarehouses_Load(object sender, EventArgs e)
-        {
-
-        }
     }
 }

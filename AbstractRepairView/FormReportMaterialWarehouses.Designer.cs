@@ -84,7 +84,6 @@
             this.Margin = new System.Windows.Forms.Padding(4);
             this.Name = "FormReportMaterialWarehouses";
             this.Text = "Материал в хранилищах";
-            this.Load += new System.EventHandler(this.FormReportMaterialWarehouses_Load);
             ((System.ComponentModel.ISupportInitialize)(this.ReportMaterialWarehouseViewModelBindingSource)).EndInit();
             this.ResumeLayout(false);
 
