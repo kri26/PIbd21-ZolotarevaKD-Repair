@@ -7,6 +7,8 @@ using RepairBusinessLogic.BindingModels;
 using RepairBusinessLogic.Interfaces;
 using RepairFileImplement.Models;
 using RepairBusinessLogic.ViewModels;
+using RepairBusinessLogic.Enums;
+
 
 namespace RepairFileImplement.Implements
 {
@@ -46,6 +48,8 @@ namespace RepairFileImplement.Implements
             element.Sum = model.Sum;
             element.Status = model.Status;
             element.DateCreate = model.DateCreate;
+            element.ImplementerFIO = model.ImplementerFIO;
+            element.ImplementerId = model.ImplementerId;
             element.DateImplement = model.DateImplement;
         }
 
@@ -68,21 +72,24 @@ namespace RepairFileImplement.Implements
             return source.Orders
             .Where(rec => model == null || model.Id.HasValue && rec.Id == model.Id && rec.ClientId == model.ClientId ||
             (model.DateTo.HasValue && model.DateFrom.HasValue && rec.DateCreate >= model.DateFrom && rec.DateCreate <= model.DateTo) ||
-            (model.ClientId.HasValue && rec.ClientId == model.ClientId))
+            (model.ClientId.HasValue && rec.ClientId == model.ClientId) ||
+            (model.FreeOrder.HasValue && model.FreeOrder.Value && !(rec.ImplementerFIO != null)) ||
+                (model.ImplementerId.HasValue && rec.ImplementerId == model.ImplementerId.Value && rec.Status == OrderStatus.Выполняется)) 
             .Select(rec => new OrderViewModel
-            {
-                Id = rec.Id,
-                RepairWorkId = rec.RepairWorkId,
-                RepairWorkName = GetRepairWorkName(rec.RepairWorkId),
-                ClientFIO = rec.ClientFIO,
-                ClientId = rec.ClientId,
-                Count = rec.Count,
-                Sum = rec.Sum,
-                Status = rec.Status,
-                DateCreate = rec.DateCreate,
-                DateImplement = rec.DateImplement
-            })
-            .ToList();
+             {
+                 Id = rec.Id,
+                 RepairWorkId = rec.RepairWorkId,
+                 RepairWorkName = source.RepairWorks.FirstOrDefault((r) => r.Id == rec.RepairWorkId).RepairWorkName,
+                 ClientFIO = rec.ClientFIO,
+                 ClientId = rec.ClientId.Value,
+                 ImplementorId = rec.ImplementerId,
+                 ImplementerFIO = !string.IsNullOrEmpty(rec.ImplementerFIO) ? rec.ImplementerFIO : string.Empty,
+                 Count = rec.Count,
+                 DateCreate = rec.DateCreate,
+                 DateImplement = rec.DateImplement,
+                 Status = rec.Status,
+                 Sum = rec.Sum
+             }).ToList();
         }
 
         private string GetRepairWorkName(int id)

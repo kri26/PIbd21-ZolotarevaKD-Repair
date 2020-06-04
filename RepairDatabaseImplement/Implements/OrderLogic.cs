@@ -8,6 +8,7 @@ using RepairBusinessLogic.BindingModels;
 using RepairBusinessLogic.Interfaces;
 using RepairBusinessLogic.ViewModels;
 using RepairDatabaseImplement.Models;
+using RepairBusinessLogic.Enums;
 
 namespace RepairDatabaseImplement.Implements
 {
@@ -37,6 +38,8 @@ namespace RepairDatabaseImplement.Implements
                 element.RepairWorkId = model.RepairWorkId == 0 ? element.RepairWorkId : model.RepairWorkId;
                 element.ClientFIO = model.ClientFIO;
                 element.ClientId = model.ClientId.Value;
+                element.ImplementerFIO = model.ImplementerFIO;
+                element.ImplementerId = model.ImplementerId;
                 element.Count = model.Count;
                 element.Sum = model.Sum;
                 element.Status = model.Status;
@@ -75,13 +78,18 @@ namespace RepairDatabaseImplement.Implements
                     rec => model == null
                     || (rec.Id == model.Id && model.Id.HasValue)
                     || (model.DateFrom.HasValue && model.DateTo.HasValue && rec.DateCreate >= model.DateFrom && rec.DateCreate <= model.DateTo)
-                    || model.ClientId == rec.ClientId)
+                    || model.ClientId == rec.ClientId
+                    ||
+                (model.FreeOrder.HasValue && model.FreeOrder.Value && !(rec.ImplementerFIO != null)) ||
+                (model.ImplementerId.HasValue && rec.ImplementerId == model.ImplementerId.Value && rec.Status == OrderStatus.Выполняется))
             .Select(rec => new OrderViewModel
             {
                 Id = rec.Id,
                 RepairWorkName = rec.RepairWork.RepairWorkName,
                 ClientFIO = rec.ClientFIO,
                 ClientId = rec.ClientId,
+                ImplementorId = rec.ImplementerId,
+                ImplementerFIO = !string.IsNullOrEmpty(rec.ImplementerFIO) ? rec.ImplementerFIO : string.Empty,
                 Count = rec.Count,
                 Sum = rec.Sum,
                 Status = rec.Status,

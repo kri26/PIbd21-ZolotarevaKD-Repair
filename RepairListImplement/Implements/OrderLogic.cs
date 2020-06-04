@@ -5,6 +5,7 @@ using RepairListImplement.Models;
 using System;
 using System.Collections.Generic;
 using System.Text;
+using RepairBusinessLogic.Enums;
 
 namespace RepairListImplement.Implements
 {
@@ -64,20 +65,21 @@ namespace RepairListImplement.Implements
             {
                 if (model != null)
                 {
-                    if (order.Id == model.Id)
-                        if (order.Id == model.Id && model.Id.HasValue)
-                        {
-                            result.Add(CreateViewModel(order));
-                            break;
-                        }
-                        else if (model.DateFrom.HasValue && model.DateTo.HasValue &&
-                           order.DateCreate >= model.DateFrom && order.DateCreate <= model.DateTo)
-                        {
-                            result.Add(CreateViewModel(order));
-                        }
-                        else if (model.ClientId.HasValue && order.ClientId == model.ClientId)
-                            result.Add(CreateViewModel(order));
-                        continue;
+                    if (order.Id == model.Id && model.Id.HasValue)
+                    {
+                        result.Add(CreateViewModel(order));
+                        break;
+                    }
+                    else if (model.DateFrom.HasValue && model.DateTo.HasValue && order.DateCreate >= model.DateFrom &&
+                      order.DateCreate <= model.DateTo)
+                        result.Add(CreateViewModel(order));
+                    else if (model.ClientId.HasValue && order.ClientId == model.ClientId)
+                        result.Add(CreateViewModel(order));
+                    else if (model.FreeOrder.HasValue && model.FreeOrder.Value && !(order.ImplementerFIO != null))
+                        result.Add(CreateViewModel(order));
+                    else if (model.ImplementerId.HasValue && order.ImplementerId == model.ImplementerId.Value && order.Status == OrderStatus.Выполняется)
+                        result.Add(CreateViewModel(order));
+                    continue;
                 }
                 result.Add(CreateViewModel(order));
             }
@@ -89,6 +91,8 @@ namespace RepairListImplement.Implements
             order.ClientId = model.ClientId.Value;
             order.ClientFIO = model.ClientFIO;
             order.DateCreate = model.DateCreate;
+            order.ImplementerId = model.ImplementerId;
+            order.ImplementerFIO = model.ImplementerFIO;
             order.DateImplement = model.DateImplement;
             order.RepairWorkId = model.RepairWorkId;
             order.Status = model.Status;
@@ -115,6 +119,8 @@ namespace RepairListImplement.Implements
                 ClientFIO = order.ClientFIO,
                 DateCreate = order.DateCreate,
                 DateImplement = order.DateImplement,
+                ImplementorId = order.ImplementerId,
+                ImplementerFIO = order.ImplementerFIO,
                 RepairWorkName = RepairWorkName,
                 RepairWorkId = order.RepairWorkId,
                 Status = order.Status,

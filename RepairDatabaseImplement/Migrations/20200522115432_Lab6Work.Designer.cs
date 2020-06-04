@@ -3,15 +3,17 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using RepairDatabaseImplement;
 
 namespace RepairDatabaseImplement.Migrations
 {
     [DbContext(typeof(RepairDatabase))]
-    partial class RepairDatabaseModelSnapshot : ModelSnapshot
+    [Migration("20200522115432_Lab6Work")]
+    partial class Lab6Work
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -173,48 +175,6 @@ namespace RepairDatabaseImplement.Migrations
                     b.ToTable("RepairWorkMaterials");
                 });
 
-            modelBuilder.Entity("RepairDatabaseImplement.Models.Warehouse", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int")
-                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
-
-                    b.Property<string>("WarehouseName")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.HasKey("Id");
-
-                    b.ToTable("Warehouses");
-                });
-
-            modelBuilder.Entity("RepairDatabaseImplement.Models.WarehouseMaterial", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int")
-                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
-
-                    b.Property<int>("Count")
-                        .HasColumnType("int");
-
-                    b.Property<int>("MaterialId")
-                        .HasColumnType("int");
-
-                    b.Property<int>("WarehouseId")
-                        .HasColumnType("int");
-
-                    b.HasKey("Id");
-
-                    b.HasIndex("MaterialId");
-
-                    b.HasIndex("WarehouseId")
-                        .IsUnique();
-
-                    b.ToTable("WarehouseMaterials");
-                });
-
             modelBuilder.Entity("RepairDatabaseImplement.Models.Order", b =>
                 {
                     b.HasOne("RepairDatabaseImplement.Models.Client", "Client")
@@ -245,21 +205,6 @@ namespace RepairDatabaseImplement.Migrations
                     b.HasOne("RepairDatabaseImplement.Models.RepairWork", "RepairWork")
                         .WithMany("RepairWorkMaterials")
                         .HasForeignKey("RepairWorkId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-                });
-
-            modelBuilder.Entity("RepairDatabaseImplement.Models.WarehouseMaterial", b =>
-                {
-                    b.HasOne("RepairDatabaseImplement.Models.Material", "Material")
-                        .WithMany("WarehouseMaterials")
-                        .HasForeignKey("MaterialId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.HasOne("RepairDatabaseImplement.Models.Warehouse", "Warehouse")
-                        .WithOne("WarehouseMaterial")
-                        .HasForeignKey("RepairDatabaseImplement.Models.WarehouseMaterial", "WarehouseId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
                 });

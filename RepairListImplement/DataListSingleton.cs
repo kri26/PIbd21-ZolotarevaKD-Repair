@@ -1,4 +1,5 @@
-﻿using RepairListImplement.Models;
+﻿using RepairListImplemen.Models;
+using RepairListImplement.Models;
 using System.Collections.Generic;
 
 namespace RepairListImplement
@@ -14,7 +15,7 @@ namespace RepairListImplement
         public List<Warehouse> Warehouses { get; set; }
         public List<WarehouseMaterial> WarehouseMaterials { get; set; }
         public List<Client> Clients { set; get; }
-
+        public List<Implementer> Implementers { set; get; }
         private DataListSingleton()
         {
             Materials = new List<Material>();
@@ -24,6 +25,7 @@ namespace RepairListImplement
             Warehouses = new List<Warehouse>();
             WarehouseMaterials = new List<WarehouseMaterial>();
             Clients = new List<Client>();
+            Implementers = new List<Implementer>();
         }
 
         public static DataListSingleton GetInstance()

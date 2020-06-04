@@ -11,6 +11,8 @@ namespace RepairBusinessLogic.BusinessLogic
     public class MainLogic
     {
         private readonly IOrderLogic orderLogic;
+        private readonly object locker = new object();
+        public MainLogic(IOrderLogic orderLogic)
         private readonly IWarehouseLogic warehouseLogic;
         public MainLogic(IOrderLogic orderLogic, IWarehouseLogic warehouseLogic)
         {
@@ -32,6 +34,38 @@ namespace RepairBusinessLogic.BusinessLogic
         }
         public void TakeOrderInWork(ChangeStatusBindingModel model)
         {
+            lock (locker)
+            {
+                var order = orderLogic.Read(new OrderBindingModel { Id = model.OrderId })?[0];
+                if (order == null)
+                {
+                    throw new Exception("Не найден заказ");
+                }
+                if (order.Status != OrderStatus.Принят)
+                {
+                    throw new Exception("Заказ не в статусе \"Принят\"");
+                }
+                if (order.ImplementorId.HasValue)
+                {
+                    throw new Exception("У заказа уже есть исполнитель");
+                }
+                orderLogic.CreateOrUpdate(new OrderBindingModel
+                {
+                    Id = order.Id,
+                    RepairWorkId = order.RepairWorkId,
+                    Count = order.Count,
+                    Sum = order.Sum,
+                    ClientId = order.ClientId,
+                    ClientFIO = order.ClientFIO,
+                    ImplementerFIO = model.ImplementerFIO,
+                    ImplementerId = model.ImplementerId.Value,
+                    DateCreate = order.DateCreate,
+                    DateImplement = DateTime.Now,
+                    Status = OrderStatus.Выполняется
+                });
+            }
+        }
+
             var order = orderLogic.Read(new OrderBindingModel { Id = model.OrderId })?[0];
             if (order == null)
             {
@@ -74,6 +108,8 @@ namespace RepairBusinessLogic.BusinessLogic
                 Sum = order.Sum,
                 ClientId = order.ClientId,
                 ClientFIO = order.ClientFIO,
+                ImplementerFIO = order.ImplementerFIO,
+                ImplementerId = order.ImplementorId.Value,
                 DateCreate = order.DateCreate,
                 DateImplement = DateTime.Now,
                 Status = OrderStatus.Готов
@@ -99,6 +135,8 @@ namespace RepairBusinessLogic.BusinessLogic
                 ClientId = order.ClientId,
                 ClientFIO = order.ClientFIO,
                 DateCreate = order.DateCreate,
+                ImplementerFIO = order.ImplementerFIO,
+                ImplementerId = order.ImplementorId.Value,
                 DateImplement = order.DateImplement,
                 Status = OrderStatus.Оплачен
             });

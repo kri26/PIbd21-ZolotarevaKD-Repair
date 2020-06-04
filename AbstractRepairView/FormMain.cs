@@ -21,13 +21,15 @@ namespace RepairView
         private readonly MainLogic logic;
         private readonly IOrderLogic orderLogic;
         private readonly ReportLogic report;
+        private readonly WorkModeling modeling;
 
-        public FormMain(MainLogic logic, IOrderLogic orderLogic, ReportLogic report)
+        public FormMain(MainLogic logic, IOrderLogic orderLogic, ReportLogic report, WorkModeling modeling)
         {
             InitializeComponent();
             this.logic = logic;
             this.orderLogic = orderLogic;
             this.report = report;
+            this.modeling = modeling;
         }
 
         private void FormMain_Load(object sender, EventArgs e)
@@ -44,8 +46,9 @@ namespace RepairView
                 dataGridView.Columns[0].Visible = false;
                 dataGridView.Columns[1].Visible = false;
                 dataGridView.Columns[3].Visible = false;
-                dataGridView.Columns[8].Visible = false;
+                dataGridView.Columns[9].Visible = false;
                 dataGridView.Columns[2].AutoSizeMode = DataGridViewAutoSizeColumnMode.DisplayedCells;
+                dataGridView.Columns[11].Visible = false;
             }
             dataGridView.Update();
         }
@@ -142,7 +145,7 @@ namespace RepairView
             }
         }
 
-        private void материалыПоРемонтуToolStripMenuItem_Click(object sender, EventArgs e)
+        private void материалыДляРемонтаToolStripMenuItem_Click(object sender, EventArgs e)
         {
             var form = Container.Resolve<FormReportOrders>();
             form.ShowDialog();
@@ -198,6 +201,17 @@ namespace RepairView
                    MessageBoxIcon.Information);
                 }
             }
+        }
+
+        private void исполнителиToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            var form = Container.Resolve<FormImplementers>();
+            form.ShowDialog();
+        }
+
+        private void запускРаботToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            modeling.DoWork();
         }
     }
 }
