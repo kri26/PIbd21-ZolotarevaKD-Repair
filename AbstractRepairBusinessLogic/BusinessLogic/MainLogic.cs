@@ -48,61 +48,7 @@ namespace RepairBusinessLogic.BusinessLogic
                 if (order.ImplementorId.HasValue)
                 {
                     throw new Exception("У заказа уже есть исполнитель");
-                }/*
-                orderLogic.CreateOrUpdate(new OrderBindingModel
-                {
-                    Id = order.Id,
-                    RepairWorkId = order.RepairWorkId,
-                    Count = order.Count,
-                    Sum = order.Sum,
-                    DateCreate = order.DateCreate,
-                    DateImplement = null,
-                    Status = OrderStatus.Выполняется,
-                    ClientId = order.ClientId,
-                    ImplementerFIO = model.ImplementerFIO,
-                    ImplementerId = model.ImplementerId.Value,
-                    ClientFIO = order.ClientFIO
-                });
-                try
-                {
-                    warehouseLogic.WriteOffMaterials(order);
-                    orderLogic.CreateOrUpdate(new OrderBindingModel
-                    {
-                        Id = order.Id,
-                        RepairWorkId = order.RepairWorkId,
-                        Count = order.Count,
-                        Sum = order.Sum,
-                        DateCreate = order.DateCreate,
-                        DateImplement = null,
-                        Status = OrderStatus.Выполняется,
-                        ImplementerFIO = model.ImplementerFIO,
-                        ImplementerId = model.ImplementerId.Value,
-                        ClientId = order.ClientId,
-                        ClientFIO = order.ClientFIO
-                    });
-                    order.Status = OrderStatus.Выполняется;
                 }
-                catch (Exception)
-                {
-                    order.Status = OrderStatus.Треубуются_материалы;
-                    throw;
-                }
-                orderLogic.CreateOrUpdate(new OrderBindingModel
-                {
-                    Id = order.Id,
-                    RepairWorkId = order.RepairWorkId,
-                    Count = order.Count,
-                    Sum = order.Sum,
-                    DateCreate = order.DateCreate,
-                    DateImplement = null,
-                    Status = order.Status,
-                    ImplementerFIO = model.ImplementerFIO,
-                    ImplementerId = model.ImplementerId.Value,
-                    ClientId = order.ClientId,
-                    ClientFIO = order.ClientFIO
-                });
-                */
-                
                 
                 var orderModel = new OrderBindingModel
                 {
