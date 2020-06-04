@@ -14,7 +14,6 @@ namespace RepairBusinessLogic.BusinessLogic
         private readonly IOrderLogic orderLogic;
         private readonly object locker = new object();
         private readonly IWarehouseLogic warehouseLogic;
-        private readonly IRepairWorkLogic repairWorkLogic;
         public MainLogic(IOrderLogic orderLogic, IWarehouseLogic warehouseLogic)
         {
             this.orderLogic = orderLogic;
