@@ -59,10 +59,10 @@ namespace RepairBusinessLogic.BusinessLogic
                .Select(x => x)
                .ToList();
             orders.RemoveAll(x => notEnoughMaterialsOrders.Contains(x));
-            this.DoWork(implementer, notEnoughMaterialsOrders);
+            DoWork(implementer, notEnoughMaterialsOrders);
             await Task.Run(() =>
             {
-                this.DoWork(implementer, orders);
+                DoWork(implementer, orders);
             });
         }
 
@@ -91,7 +91,8 @@ namespace RepairBusinessLogic.BusinessLogic
                     mainLogic.FinishOrder(new ChangeStatusBindingModel
                     {
                         OrderId = order.Id,
-                        ImplementerId = implementer.Id
+                        ImplementerId = implementer.Id,
+                        ImplementerFIO = implementer.ImplementerFIO
                     });
                     // отдыхаем
                     Thread.Sleep(implementer.PauseTime);
