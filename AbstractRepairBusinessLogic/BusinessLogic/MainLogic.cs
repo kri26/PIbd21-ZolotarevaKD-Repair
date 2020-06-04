@@ -4,6 +4,7 @@ using RepairBusinessLogic.Interfaces;
 using RepairBusinessLogic.ViewModels;
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Text;
 
 namespace RepairBusinessLogic.BusinessLogic
@@ -12,8 +13,8 @@ namespace RepairBusinessLogic.BusinessLogic
     {
         private readonly IOrderLogic orderLogic;
         private readonly object locker = new object();
-        public MainLogic(IOrderLogic orderLogic)
         private readonly IWarehouseLogic warehouseLogic;
+        private readonly IRepairWorkLogic repairWorkLogic;
         public MainLogic(IOrderLogic orderLogic, IWarehouseLogic warehouseLogic)
         {
             this.orderLogic = orderLogic;
@@ -41,13 +42,51 @@ namespace RepairBusinessLogic.BusinessLogic
                 {
                     throw new Exception("Не найден заказ");
                 }
-                if (order.Status != OrderStatus.Принят)
+                if (order.Status != OrderStatus.Принят && order.Status != OrderStatus.Треубуются_материалы)
                 {
-                    throw new Exception("Заказ не в статусе \"Принят\"");
+                    throw new Exception("Заказ не в статусе \"Принят\"или \"Требуются материалы\"");
                 }
                 if (order.ImplementorId.HasValue)
                 {
                     throw new Exception("У заказа уже есть исполнитель");
+                }/*
+                orderLogic.CreateOrUpdate(new OrderBindingModel
+                {
+                    Id = order.Id,
+                    RepairWorkId = order.RepairWorkId,
+                    Count = order.Count,
+                    Sum = order.Sum,
+                    DateCreate = order.DateCreate,
+                    DateImplement = null,
+                    Status = OrderStatus.Выполняется,
+                    ClientId = order.ClientId,
+                    ImplementerFIO = model.ImplementerFIO,
+                    ImplementerId = model.ImplementerId.Value,
+                    ClientFIO = order.ClientFIO
+                });
+                try
+                {
+                    warehouseLogic.WriteOffMaterials(order);
+                    orderLogic.CreateOrUpdate(new OrderBindingModel
+                    {
+                        Id = order.Id,
+                        RepairWorkId = order.RepairWorkId,
+                        Count = order.Count,
+                        Sum = order.Sum,
+                        DateCreate = order.DateCreate,
+                        DateImplement = null,
+                        Status = OrderStatus.Выполняется,
+                        ImplementerFIO = model.ImplementerFIO,
+                        ImplementerId = model.ImplementerId.Value,
+                        ClientId = order.ClientId,
+                        ClientFIO = order.ClientFIO
+                    });
+                    order.Status = OrderStatus.Выполняется;
+                }
+                catch (Exception)
+                {
+                    order.Status = OrderStatus.Треубуются_материалы;
+                    throw;
                 }
                 orderLogic.CreateOrUpdate(new OrderBindingModel
                 {
@@ -55,39 +94,43 @@ namespace RepairBusinessLogic.BusinessLogic
                     RepairWorkId = order.RepairWorkId,
                     Count = order.Count,
                     Sum = order.Sum,
-                    ClientId = order.ClientId,
-                    ClientFIO = order.ClientFIO,
+                    DateCreate = order.DateCreate,
+                    DateImplement = null,
+                    Status = order.Status,
                     ImplementerFIO = model.ImplementerFIO,
                     ImplementerId = model.ImplementerId.Value,
-                    DateCreate = order.DateCreate,
-                    DateImplement = DateTime.Now,
-                    Status = OrderStatus.Выполняется
+                    ClientId = order.ClientId,
+                    ClientFIO = order.ClientFIO
                 });
-            }
-        }
+                */
+                
+                
+                var orderModel = new OrderBindingModel
+                {
+                    Id = order.Id,
+                    RepairWorkId = order.RepairWorkId,
+                    Count = order.Count,
+                    Sum = order.Sum,
+                    ClientId = order.ClientId,
+                    ClientFIO = order.ClientFIO,
+                    DateCreate = order.DateCreate
+                };
 
-            var order = orderLogic.Read(new OrderBindingModel { Id = model.OrderId })?[0];
-            if (order == null)
-            {
-                throw new Exception("Не найден заказ");
-            }
-            if (order.Status != OrderStatus.Принят)
-            {
-                throw new Exception("Заказ не в статусе \"Принят\"");
-            }
-            warehouseLogic.WriteOffMaterials(order);
+                try
+                {
+                    warehouseLogic.WriteOffMaterials(order);
+                    orderModel.DateImplement = DateTime.Now;
+                    orderModel.Status = OrderStatus.Выполняется;
+                    orderModel.ImplementerId = model.ImplementerId;
+                }
+                catch
+                {
+                    orderModel.Status = OrderStatus.Треубуются_материалы;
+                }
 
-            orderLogic.CreateOrUpdate(new OrderBindingModel
-            {
-                Id = order.Id,
-                RepairWorkId = order.RepairWorkId,
-                Count = order.Count,
-                Sum = order.Sum,
-                ClientId = order.ClientId,
-                ClientFIO = order.ClientFIO,
-                DateCreate = order.DateCreate,
-                Status = OrderStatus.Выполняется
-            });
+                orderLogic.CreateOrUpdate(orderModel);
+                
+            }
         }
         public void FinishOrder (ChangeStatusBindingModel model)
         {

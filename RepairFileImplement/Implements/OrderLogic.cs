@@ -74,7 +74,8 @@ namespace RepairFileImplement.Implements
             (model.DateTo.HasValue && model.DateFrom.HasValue && rec.DateCreate >= model.DateFrom && rec.DateCreate <= model.DateTo) ||
             (model.ClientId.HasValue && rec.ClientId == model.ClientId) ||
             (model.FreeOrder.HasValue && model.FreeOrder.Value && !(rec.ImplementerFIO != null)) ||
-                (model.ImplementerId.HasValue && rec.ImplementerId == model.ImplementerId.Value && rec.Status == OrderStatus.Выполняется)) 
+                (model.ImplementerId.HasValue && rec.ImplementerId == model.ImplementerId.Value && rec.Status == OrderStatus.Выполняется) ||
+                (model.NotEnoughMaterialsOrders.HasValue && model.NotEnoughMaterialsOrders.Value && rec.Status == OrderStatus.Треубуются_материалы)) 
             .Select(rec => new OrderViewModel
              {
                  Id = rec.Id,

@@ -72,58 +72,6 @@ namespace RepairView
             LoadData();
         }
 
-        private void ButtonTakeOrderInWork_Click(object sender, EventArgs e)
-        {
-            if (dataGridView.SelectedRows.Count == 1)
-            {
-                int id = Convert.ToInt32(dataGridView.SelectedRows[0].Cells[0].Value);
-                try
-                {
-                    logic.TakeOrderInWork(new ChangeStatusBindingModel { OrderId = id });
-                    LoadData();
-                }
-                catch (Exception ex)
-                {
-                    MessageBox.Show(ex.Message, "Ошибка", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                }
-            }
-        }
-
-        private void ButtonOrderReady_Click(object sender, EventArgs e)
-        {
-            if (dataGridView.SelectedRows.Count == 1)
-            {
-                int id = Convert.ToInt32(dataGridView.SelectedRows[0].Cells[0].Value);
-                try
-                {
-                    logic.FinishOrder(new ChangeStatusBindingModel { OrderId = id });
-                    LoadData();
-                }
-                catch (Exception ex)
-                {
-                    MessageBox.Show(ex.Message, "Ошибка", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                }
-            }
-        }
-
-        private void ButtonPayOrder_Click(object sender, EventArgs e)
-        {
-            if (dataGridView.SelectedRows.Count == 1)
-            {
-                int id = Convert.ToInt32(dataGridView.SelectedRows[0].Cells[0].Value);
-                try
-                {
-                    logic.PayOrder(new ChangeStatusBindingModel { OrderId = id });
-                    LoadData();
-                }
-                catch (Exception ex)
-                {
-                    MessageBox.Show(ex.Message, "Ошибка", MessageBoxButtons.OK,
-                   MessageBoxIcon.Error);
-                }
-            }
-        }
-
         private void ButtonRef_Click(object sender, EventArgs e)
         {
             LoadData();
@@ -145,7 +93,7 @@ namespace RepairView
             }
         }
 
-        private void материалыДляРемонтаToolStripMenuItem_Click(object sender, EventArgs e)
+        private void материалыПоРемонтуToolStripMenuItem_Click(object sender, EventArgs e)
         {
             var form = Container.Resolve<FormReportOrders>();
             form.ShowDialog();

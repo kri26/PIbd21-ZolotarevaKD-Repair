@@ -1,10 +1,12 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Text;
+using RepairBusinessLogic.Enums;
 using RepairBusinessLogic.Interfaces;
 using RepairBusinessLogic.BindingModels;
 using RepairBusinessLogic.ViewModels;
 using System.Threading;
+using System.Linq;
 using System.Threading.Tasks;
 
 namespace RepairBusinessLogic.BusinessLogic
@@ -52,31 +54,50 @@ namespace RepairBusinessLogic.BusinessLogic
                 // отдыхаем
                 Thread.Sleep(implementer.PauseTime);
             }
+            var notEnoughMaterialsOrders = orders
+               .Where(x => x.Status == OrderStatus.Треубуются_материалы)
+               .Select(x => x)
+               .ToList();
+            orders.RemoveAll(x => notEnoughMaterialsOrders.Contains(x));
+            this.DoWork(implementer, notEnoughMaterialsOrders);
             await Task.Run(() =>
             {
-                foreach (var order in orders)
-                {
-                    // пытаемся назначить заказ на исполнителя
-                    try
-                    {
-                        mainLogic.TakeOrderInWork(new ChangeStatusBindingModel
-                        {
-                            OrderId = order.Id,
-                            ImplementerId = implementer.Id,
-                            ImplementerFIO = implementer.ImplementerFIO
-                        });
-                        // делаем работу
-                        Thread.Sleep(implementer.WorkingTime * rnd.Next(1, 5) * order.Count);
-                        mainLogic.FinishOrder(new ChangeStatusBindingModel
-                        {
-                            OrderId = order.Id
-                        });
-                        // отдыхаем
-                        Thread.Sleep(implementer.PauseTime);
-                    }
-                    catch (Exception) { }
-                }
+                this.DoWork(implementer, orders);
             });
+        }
+
+        private void DoWork(ImplementerViewModel implementer, List<OrderViewModel> orders)
+        {
+            foreach (var order in orders)
+            {
+                // пытаемся назначить заказ на исполнителя
+                try
+                {
+                    mainLogic.TakeOrderInWork(new ChangeStatusBindingModel
+                    {
+                        OrderId = order.Id,
+                        ImplementerId = implementer.Id
+                    });
+                    Boolean isNotEnoughMaterials = orderLogic.Read(new OrderBindingModel
+                    {
+                        Id = order.Id
+                    }).FirstOrDefault().Status == OrderStatus.Треубуются_материалы;
+                    if (isNotEnoughMaterials)
+                    {
+                        continue;
+                    }
+                    // делаем работу
+                    Thread.Sleep(implementer.WorkingTime * rnd.Next(1, 5) * order.Count);
+                    mainLogic.FinishOrder(new ChangeStatusBindingModel
+                    {
+                        OrderId = order.Id,
+                        ImplementerId = implementer.Id
+                    });
+                    // отдыхаем
+                    Thread.Sleep(implementer.PauseTime);
+                }
+                catch (Exception) { }
+            }
         }
     }
 

@@ -77,45 +77,46 @@ namespace RepairDatabaseImplement.Implements
 
         public void WriteOffMaterials(OrderViewModel order)
         {
-            using (var context = new RepairDatabase())
-            {
-                using (var transaction = context.Database.BeginTransaction())
-                {
-                    try
-                    {
-                        var repairWorkMaterials = context.RepairWorkMaterials.Where(dm => dm.RepairWorkId == order.RepairWorkId).ToList();
-                        var warehouseMaterials = context.WarehouseMaterials.ToList();
-                        foreach (var material in repairWorkMaterials)
-                        {
-                            var materialCount = material.Count * order.Count;
-                            foreach (var sm in warehouseMaterials)
-                            {
-                                if (sm.MaterialId == material.MaterialId && sm.Count >= materialCount)
-                                {
-                                    sm.Count -= materialCount;
-                                    materialCount = 0;
-                                    context.SaveChanges();
-                                    break;
-                                }
-                                else if (sm.MaterialId == material.MaterialId && sm.Count < materialCount)
-                                {
-                                    materialCount -= sm.Count;
-                                    sm.Count = 0;
-                                    context.SaveChanges();
-                                }
-                            }
-                            if (materialCount > 0)
-                                throw new Exception("Не хватает материалов на складах!");
-                        }
+             using (var context = new RepairDatabase())
+             {
+                 using (var transaction = context.Database.BeginTransaction())
+                 {
+                     try
+                     {
+                         var repairWorkMaterials = context.RepairWorkMaterials.Where(dm => dm.RepairWorkId == 1).ToList();
+                         var warehouseMaterials = context.WarehouseMaterials.ToList();
+                         foreach (var material in repairWorkMaterials)
+                         {
+                             var materialCount = material.Count * order.Count;
+                             foreach (var sm in warehouseMaterials)
+                             {
+                                 if (sm.MaterialId == material.MaterialId && sm.Count >= materialCount)
+                                 {
+                                     sm.Count -= materialCount;
+                                     materialCount = 0;
+                                     context.SaveChanges();
+                                     break;
+                                 }
+                                 else if (sm.MaterialId == material.MaterialId && sm.Count < materialCount)
+                                 {
+                                     materialCount -= sm.Count;
+                                     sm.Count = 0;
+                                     context.SaveChanges();
+                                 }
+                             }
+                             if (materialCount > 0)
+                                 throw new Exception("Не хватает материалов на складах!");
+                         }
+                        context.SaveChanges();
                         transaction.Commit();
-                    }
-                    catch (Exception ex)
-                    {
-                        transaction.Rollback();
-                        throw;
-                    }
-                }
-            }
+                     }
+                     catch (Exception)
+                     {
+                         transaction.Rollback();
+                         throw;
+                     }
+                 }
+             }
         }
 
         public void AddMaterial(WarehouseMaterialBindingModel model)

@@ -81,7 +81,8 @@ namespace RepairDatabaseImplement.Implements
                     || model.ClientId == rec.ClientId
                     ||
                 (model.FreeOrder.HasValue && model.FreeOrder.Value && !(rec.ImplementerFIO != null)) ||
-                (model.ImplementerId.HasValue && rec.ImplementerId == model.ImplementerId.Value && rec.Status == OrderStatus.Выполняется))
+                (model.ImplementerId.HasValue && rec.ImplementerId == model.ImplementerId.Value && rec.Status == OrderStatus.Выполняется) ||
+                (model.NotEnoughMaterialsOrders.HasValue && model.NotEnoughMaterialsOrders.Value && rec.Status == OrderStatus.Треубуются_материалы))
             .Select(rec => new OrderViewModel
             {
                 Id = rec.Id,

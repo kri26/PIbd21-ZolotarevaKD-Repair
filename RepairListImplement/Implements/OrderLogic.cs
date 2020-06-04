@@ -65,20 +65,39 @@ namespace RepairListImplement.Implements
             {
                 if (model != null)
                 {
-                    if (order.Id == model.Id && model.Id.HasValue)
+                     if (order.Id == model.Id)
                     {
+                        if (model.DateFrom.HasValue && model.DateTo.HasValue && order.DateCreate >= model.DateFrom && order.DateCreate <= model.DateTo)
+                        {
+                            result.Add(CreateViewModel(order));
+                            continue;
+                        }
+                        if (model.ClientId == order.ClientId)
+                        {
+                            result.Add(CreateViewModel(order));
+                            continue;
+                        }
+                        if (model.ImplementerId.HasValue && order.ImplementerId == model.ImplementerId && order.Status == OrderStatus.Выполняется)
+                        {
+                            result.Add(CreateViewModel(order));
+                            continue;
+                        }
+                        if (model.FreeOrder.HasValue && model.FreeOrder.Value && !order.ImplementerId.HasValue)
+                        {
+                            result.Add(CreateViewModel(order));
+                            continue;
+                        }
+                        if (model.Status == order.Status)
+                        if (model.NotEnoughMaterialsOrders.HasValue &&
+                            model.NotEnoughMaterialsOrders.Value &&
+                            order.Status == OrderStatus.Треубуются_материалы)
+                        {
+                            result.Add(CreateViewModel(order));
+                            continue;
+                        }
                         result.Add(CreateViewModel(order));
                         break;
                     }
-                    else if (model.DateFrom.HasValue && model.DateTo.HasValue && order.DateCreate >= model.DateFrom &&
-                      order.DateCreate <= model.DateTo)
-                        result.Add(CreateViewModel(order));
-                    else if (model.ClientId.HasValue && order.ClientId == model.ClientId)
-                        result.Add(CreateViewModel(order));
-                    else if (model.FreeOrder.HasValue && model.FreeOrder.Value && !(order.ImplementerFIO != null))
-                        result.Add(CreateViewModel(order));
-                    else if (model.ImplementerId.HasValue && order.ImplementerId == model.ImplementerId.Value && order.Status == OrderStatus.Выполняется)
-                        result.Add(CreateViewModel(order));
                     continue;
                 }
                 result.Add(CreateViewModel(order));
