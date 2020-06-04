@@ -90,7 +90,7 @@ namespace RepairDatabaseImplement.Implements
                 ClientFIO = rec.ClientFIO,
                 ClientId = rec.ClientId,
                 ImplementorId = rec.ImplementerId,
-                ImplementerFIO = !string.IsNullOrEmpty(rec.ImplementerFIO) ? rec.ImplementerFIO : string.Empty,
+                ImplementerFIO = rec.Implementer.ImplementerFIO,
                 Count = rec.Count,
                 Sum = rec.Sum,
                 Status = rec.Status,
