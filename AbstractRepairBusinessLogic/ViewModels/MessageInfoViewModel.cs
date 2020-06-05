@@ -1,4 +1,5 @@
 ﻿using System;
+using RepairBusinessLogic.Attributes;
 using System.Collections.Generic;
 using System.Text;
 using System.ComponentModel;
@@ -7,21 +8,22 @@ using System.Runtime.Serialization;
 namespace RepairBusinessLogic.ViewModels
 {
     [DataContract]
-    public class MessageInfoViewModel
+    public class MessageInfoViewModel : BaseViewModel
     {
         [DataMember]
         public string MessageId { get; set; }
-        [DisplayName("Отправитель")]
+        [Column(title: "Отправитель", width: 100)]
         [DataMember]
         public string SenderName { get; set; }
-        [DisplayName("Дата письма")]
+        [Column(title: "Дата письма", width: 100)]
         [DataMember]
         public DateTime DateDelivery { get; set; }
-        [DisplayName("Заголовок")]
+        [Column(title: "Заголовок", gridViewAutoSize: GridViewAutoSize.Fill)]
         [DataMember]
         public string Subject { get; set; }
-        [DisplayName("Текст")]
+        [Column(title: "Текст", gridViewAutoSize: GridViewAutoSize.Fill)]
         [DataMember]
         public string Body { get; set; }
+        public override List<string> Properties() => new List<string> { "SenderName", "DateDelivery", "Subject", "Body" };
     }
 }

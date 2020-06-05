@@ -5,7 +5,6 @@ using RepairBusinessLogic.HelperModels;
 using System;
 using System.Collections.Generic;
 using System.Text;
-using RepairBusinessLogic.BindingLogic;
 
 namespace RepairBusinessLogic.BusinessLogic
 {
