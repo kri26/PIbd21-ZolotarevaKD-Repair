@@ -15,8 +15,6 @@ namespace RepairListImplement.Models
         public DateTime DateCreate { get; set; }
         public DateTime? DateImplement { get; set; }
         public int? ImplementerId { set; get; }
-        public string ImplementerFIO { set; get; }
         public int? ClientId { set; get; }
-        public string ClientFIO { set; get; }
     }
 }
