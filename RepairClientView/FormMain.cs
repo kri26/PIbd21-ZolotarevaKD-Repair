@@ -27,6 +27,8 @@ namespace RepairClientView
                 dataGridViewClientOrders.Columns[2].Visible = false;
                 dataGridViewClientOrders.Columns[3].Visible = false;
                 dataGridViewClientOrders.Columns[9].Visible = false;
+                dataGridViewClientOrders.Columns[8].Visible = false;
+                dataGridViewClientOrders.Columns[10].Visible = false;
                 dataGridViewClientOrders.Columns[11].Visible = false;
                 dataGridViewClientOrders.Columns[4].AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill;
             }
