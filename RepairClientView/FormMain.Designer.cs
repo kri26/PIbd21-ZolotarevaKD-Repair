@@ -96,7 +96,7 @@
             this.Controls.Add(this.menuStrip1);
             this.MainMenuStrip = this.menuStrip1;
             this.Name = "FormMainClient";
-            this.Text = "FormMainClient";
+            this.Text = "Главная";
             ((System.ComponentModel.ISupportInitialize)(this.dataGridViewClientOrders)).EndInit();
             this.menuStrip1.ResumeLayout(false);
             this.menuStrip1.PerformLayout();
