@@ -70,11 +70,10 @@ namespace RepairDatabaseImplement.Implements
             .Where(
                     rec => model == null
                     || (rec.Id == model.Id && model.Id.HasValue)
-                    || (model.DateFrom.HasValue && model.DateTo.HasValue && rec.DateCreate >= model.DateFrom && rec.DateCreate <= model.DateTo)
-                    || model.ClientId == rec.ClientId
-                    ||
-                (model.FreeOrder.HasValue && model.FreeOrder.Value && !(rec.ImplementerFIO != null)) ||
-                (model.ImplementerId.HasValue && rec.ImplementerId == model.ImplementerId.Value && rec.Status == OrderStatus.Выполняется))
+                    || (model.DateFrom.HasValue && model.DateTo.HasValue && (rec.DateCreate >= model.DateFrom) && (rec.DateCreate <= model.DateTo))
+                    || (model.ClientId == rec.ClientId)
+                    || (model.FreeOrder.HasValue && model.FreeOrder.Value && !(rec.ImplementerFIO != null)) 
+                    || (model.ImplementerId.HasValue && rec.ImplementerId == model.ImplementerId.Value && rec.Status == OrderStatus.Выполняется))
             .Select(rec => new OrderViewModel
             {
                 Id = rec.Id,
