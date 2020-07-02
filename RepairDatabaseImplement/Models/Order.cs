@@ -11,8 +11,6 @@ namespace RepairDatabaseImplement.Models
         public int Id { get; set; }
         [Required]
         public int ClientId { set; get; }
-        [Required]
-        public string ClientFIO { set; get; }
         public int RepairWorkId { get; set; }
 
         [Required]
@@ -24,7 +22,6 @@ namespace RepairDatabaseImplement.Models
         [Required]
         public OrderStatus Status { get; set; }
         public int? ImplementerId { set; get; }
-        public string ImplementerFIO { set; get; }
         [Required]
         public DateTime DateCreate { get; set; }
 
