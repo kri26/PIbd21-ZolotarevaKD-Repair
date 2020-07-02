@@ -10,6 +10,5 @@ namespace RepairFileImplement.Models
         public string ImplementerFIO { set; get; }
         public int WorkTime { set; get; }
         public int PauseTime { set; get; }
-        public virtual List<Order> Orders { set; get; }
     }
 }
