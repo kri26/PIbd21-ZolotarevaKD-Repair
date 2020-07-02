@@ -171,6 +171,7 @@ namespace RepairFileImplement
                    elem.Element("Status").Value),
                         DateCreate =
                    Convert.ToDateTime(elem.Element("DateCreate").Value),
+                        ImplementerId = Convert.ToInt32(elem.Attribute("ImplementerId").Value),
                         DateImplement =
                    string.IsNullOrEmpty(elem.Element("DateImplement").Value) ? (DateTime?)null :
                    Convert.ToDateTime(elem.Element("DateImplement").Value),
@@ -280,6 +281,7 @@ namespace RepairFileImplement
                     new XElement("Count", order.Count),
                     new XElement("Sum", order.Sum),
                     new XElement("Status", order.Status),
+                    new XElement("ImplementerId", booking.ImplementerId),
                     new XElement("DateCreate", order.DateCreate),
                     new XElement("DateImplement", order.DateImplement)));
                 }
