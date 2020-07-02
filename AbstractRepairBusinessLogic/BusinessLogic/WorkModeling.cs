@@ -58,6 +58,10 @@ namespace RepairBusinessLogic.BusinessLogic
                .Where(x => x.Status == OrderStatus.Треубуются_материалы)
                .Select(x => x)
                .ToList();
+            var isNotEnoughMaterialsBookings = bookingLogic.Read(new BookingBindingModel
+            {
+                IsNotEnoughMaterialsBookings = true
+            });
             orders.RemoveAll(x => notEnoughMaterialsOrders.Contains(x));
             DoWork(implementer, notEnoughMaterialsOrders);
             await Task.Run(() =>
