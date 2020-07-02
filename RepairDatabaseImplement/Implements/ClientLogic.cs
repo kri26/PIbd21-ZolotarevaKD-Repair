@@ -63,6 +63,7 @@ namespace RepairDatabaseImplement.Implements
             {
                 return context.Clients
                 .Where(rec => model == null 
+
                 || (rec.Id == model.Id)
                 || (rec.Login == model.Login && rec.Password == model.Password))
                 .Select(rec => new ClientViewModel
