@@ -65,20 +65,15 @@ namespace RepairListImplement.Implements
             {
                 if (model != null)
                 {
-                    if (order.Id == model.Id && model.Id.HasValue)
+                     if ((model.Id.HasValue && booking.Id == model.Id)
+                        || (model.DateFrom.HasValue && model.DateTo.HasValue && booking.DateCreate >= model.DateFrom && booking.DateCreate <= model.DateTo)
+                        || (booking.ClientId == model.ClientId)
+                        || (model.FreeOrder.HasValue && model.FreeOrder.Value && !booking.ImplementerId.HasValue)
+                        || (model.ImplementerId.HasValue && booking.ImplementerId == model.ImplementerId && booking.Status == BookingStatus.Выполняется))
                     {
                         result.Add(CreateViewModel(order));
                         break;
                     }
-                    else if (model.DateFrom.HasValue && model.DateTo.HasValue && order.DateCreate >= model.DateFrom &&
-                      order.DateCreate <= model.DateTo)
-                        result.Add(CreateViewModel(order));
-                    else if (model.ClientId.HasValue && order.ClientId == model.ClientId)
-                        result.Add(CreateViewModel(order));
-                    else if (model.FreeOrder.HasValue && model.FreeOrder.Value && !(order.ImplementerFIO != null))
-                        result.Add(CreateViewModel(order));
-                    else if (model.ImplementerId.HasValue && order.ImplementerId == model.ImplementerId.Value && order.Status == OrderStatus.Выполняется)
-                        result.Add(CreateViewModel(order));
                     continue;
                 }
                 result.Add(CreateViewModel(order));
@@ -87,6 +82,44 @@ namespace RepairListImplement.Implements
         }
         private Order CreateModel(OrderBindingModel model, Order order)
         {
+            RepairWork repairWork = null;
+
+            foreach (RepairWork i in source.RepairWork)
+            {
+                if (i.Id == model.RepairWork)
+                {
+                    repairWork = i;
+                    break;
+                }
+            }
+
+            Client client = null;
+
+            foreach (Client c in source.Clients)
+            {
+                if (c.Id == model.ClientId)
+                {
+                    client = c;
+                    break;
+                }
+            }
+
+            Implementer implementer = null;
+
+            foreach (Implementer i in source.Implementers)
+            {
+                if (i.Id == model.ImplementerId)
+                {
+                    implementer = i;
+                    break;
+                }
+            }
+
+            if (repairWork == null || client == null || model.ImplementerId.HasValue && implementer == null)
+            {
+                throw new Exception("Элемент не найден");
+            }
+            
             order.Count = model.Count;
             order.ClientId = model.ClientId.Value;
             order.ClientFIO = model.ClientFIO;
@@ -102,12 +135,24 @@ namespace RepairListImplement.Implements
 
         private OrderViewModel CreateViewModel(Order order)
         {
-            string RepairWorkName = "";
-            foreach (var RepairWork in source.Assemblies)
+            RepairWork repairWork = null;
+
+            foreach (RepairWork repair in source.RepairWork)
             {
-                if (RepairWork.Id == order.RepairWorkId)
+                if (repair.Id == order.RepairWorkId)
                 {
-                    RepairWorkName = RepairWork.RepairWorkName;
+                    repairWork = repair;
+                    break;
+                }
+            }
+
+            Client client = null;
+
+            foreach (Client c in source.Clients)
+            {
+                if (c.Id == order.RepairWorkId)
+                {
+                    client  = c;
                     break;
                 }
             }
@@ -116,12 +161,12 @@ namespace RepairListImplement.Implements
                 Id = order.Id,
                 Count = order.Count,
                 ClientId = order.ClientId,
-                ClientFIO = order.ClientFIO,
+                ClientFIO = client.ClientFIO,
                 DateCreate = order.DateCreate,
                 DateImplement = order.DateImplement,
                 ImplementorId = order.ImplementerId,
-                ImplementerFIO = order.ImplementerFIO,
-                RepairWorkName = RepairWorkName,
+                ImplementerFIO = implementer.ImplementerFIO,
+                RepairWorkName = repairWork.RepairWorkName,
                 RepairWorkId = order.RepairWorkId,
                 Status = order.Status,
                 Sum = order.Sum
