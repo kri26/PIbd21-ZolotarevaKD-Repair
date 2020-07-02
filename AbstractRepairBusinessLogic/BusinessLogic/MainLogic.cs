@@ -71,6 +71,7 @@ namespace RepairBusinessLogic.BusinessLogic
                 catch
                 {
                     orderModel.Status = OrderStatus.Треубуются_материалы;
+                    throw;
                 }
 
                 orderLogic.CreateOrUpdate(orderModel);
