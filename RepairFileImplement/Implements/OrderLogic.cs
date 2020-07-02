@@ -1,4 +1,4 @@
-﻿using RepairBusinessLogic.BindingModels;
+using RepairBusinessLogic.BindingModels;
 using RepairBusinessLogic.Interfaces;
 using RepairFileImplement.Models;
 using RepairBusinessLogic.ViewModels;
@@ -63,7 +63,7 @@ namespace RepairFileImplement.Implements
         public List<OrderViewModel> Read(OrderBindingModel model)
         {
             return source.Orders
-            .Where(rec => model == null 
+             .Where(rec => model == null 
                   || (model.Id.HasValue && rec.Id == model.Id && rec.ClientId == model.ClientId)
                   || (model.DateTo.HasValue && model.DateFrom.HasValue && rec.DateCreate >= model.DateFrom && rec.DateCreate <= model.DateTo) 
                   || (model.ClientId.HasValue && rec.ClientId == model.ClientId) 
