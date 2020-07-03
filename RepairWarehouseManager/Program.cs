@@ -25,8 +25,6 @@ namespace RepairWarehouseManager
             {
                 Application.Run(new FormMain());
             }
-            else
-                MessageBox.Show("Ïàðîëü íåâåðíûé!", "Îøèáêà", MessageBoxButtons.OK);
         }
     }
 }
