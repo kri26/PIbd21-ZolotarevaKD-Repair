@@ -11,8 +11,6 @@ namespace RepairDatabaseImplement.Models
         public int Id { get; set; }
         [Required]
         public int ClientId { set; get; }
-        [Required]
-        public string ClientFIO { set; get; }
         public int RepairWorkId { get; set; }
 
         [Required]
