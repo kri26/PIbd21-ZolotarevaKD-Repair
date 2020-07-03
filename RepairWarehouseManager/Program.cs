@@ -9,6 +9,7 @@ namespace RepairWarehouseManager
 {
     static class Program
     {
+        public static bool IsLogined { get; set; }
         /// <summary>
         ///  The main entry point for the application.
         /// </summary>
@@ -18,17 +19,14 @@ namespace RepairWarehouseManager
             Application.SetHighDpiMode(HighDpiMode.SystemAware);
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
-
             ApiClient.Connect();
-
             var form = new FormLogin();
-            if (form.ShowDialog() == DialogResult.OK &&
-                form.Password.Equals(ConfigurationManager.AppSettings["Password"]))
+             if (IsLogined)
             {
                 Application.Run(new FormMain());
             }
             else
-                MessageBox.Show("Пароль неверный!", "Ошибка", MessageBoxButtons.OK);
+                MessageBox.Show("ГЏГ Г°Г®Г«Гј Г­ГҐГўГҐГ°Г­Г»Г©!", "ГЋГёГЁГЎГЄГ ", MessageBoxButtons.OK);
         }
     }
 }
