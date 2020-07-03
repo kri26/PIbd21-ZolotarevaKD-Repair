@@ -23,12 +23,18 @@ namespace RepairWarehouseManager
         {
             if (!string.IsNullOrEmpty(textBoxPassword.Text))
             {
-                Password = textBoxPassword.Text;
-                DialogResult = DialogResult.OK;
-                Close();
+                if (textBoxPassword.Text == ConfigurationManager.AppSettings["Password"])
+                {
+                    Program.IsLogined = true;
+                    Close();
+                }
+                else
+                {
+                    MessageBox.Show("Неверный пароль", "Ошибка", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                }
             }
             else
-                MessageBox.Show("Неправильный пароль!", "Ошибка", MessageBoxButtons.OK);
+                MessageBox.Show("Введите пароль", "Ошибка", MessageBoxButtons.OK);
         }
     }
 }
